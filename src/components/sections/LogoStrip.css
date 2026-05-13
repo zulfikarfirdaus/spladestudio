@@ -1,0 +1,86 @@
+.logos {
+  background: var(--white);
+  padding: 0 0 56px;
+}
+
+/* ── Headline ─────────────────────────────────────── */
+.logos__headline {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy);
+  padding: 56px 0 40px;
+  opacity: 0.35;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Fade edges ───────────────────────────────────── */
+.logos__track-wrapper {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+/* ── Marquee track ────────────────────────────────── */
+.logos__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: logos-scroll 28s linear infinite;
+}
+
+.logos__track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Individual item ──────────────────────────────── */
+.logos__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 56px;
+  flex-shrink: 0;
+}
+
+.logos__item img {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0);
+  opacity: 0.25;
+  transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+.logos__item:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+@keyframes logos-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .logos__item {
+    padding: 0 36px;
+  }
+
+  .logos__item img {
+    height: 22px;
+  }
+}

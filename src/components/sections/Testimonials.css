@@ -1,0 +1,100 @@
+.testimonials {
+  background: var(--off);
+  padding: var(--section-pad) 0;
+}
+
+/* ── Label ────────────────────────────────────────── */
+.testi__label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+/* ── Quote ────────────────────────────────────────── */
+.testi__quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.35;
+  max-width: 900px;
+  margin: 0 0 56px;
+}
+
+/* ── Footer row ───────────────────────────────────── */
+.testi__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Author ───────────────────────────────────────── */
+.testi__author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.testi__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testi__avatar--placeholder {
+  background: var(--navy);
+  color: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.testi__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.testi__meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── Nav buttons ──────────────────────────────────── */
+.testi__nav {
+  display: flex;
+  gap: 8px;
+}
+
+.testi__nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(19, 25, 43, 0.18);
+  background: transparent;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.testi__nav-btn:hover {
+  background: var(--white);
+  border-color: rgba(19, 25, 43, 0.35);
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 600px) {
+  .testi__quote {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+  }
+}

@@ -1,0 +1,130 @@
+.work-hero {
+  background: var(--navy);
+  padding: 160px 0 100px;
+}
+
+.work-hero__content {
+  max-width: 760px;
+}
+
+.work-hero__eyebrow {
+  color: var(--lime);
+  display: block;
+  margin-bottom: 24px;
+}
+
+.work-hero__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.work-hero__sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+/* ── Row list ─────────────────────────────────────── */
+.wpage-list {
+  background: var(--white);
+  padding: var(--section-pad) 0;
+}
+
+.wpage-rows {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(19,25,43,0.08);
+}
+
+.wpage-row {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 80px;
+  align-items: center;
+  padding: 72px 0;
+  border-bottom: 1px solid rgba(19,25,43,0.08);
+}
+
+.wpage-row__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.wpage-row__name {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.wpage-row__desc {
+  font-size: 0.95rem;
+  color: rgba(19,25,43,0.5);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 400px;
+}
+
+.wpage-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.wpage-row__visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+  border-bottom: 1px solid rgba(19,25,43,0.25);
+  padding-bottom: 2px;
+  width: fit-content;
+  transition: color 0.2s, border-color 0.2s;
+}
+.wpage-row__visit:hover {
+  color: var(--lime);
+  filter: brightness(0.8);
+  border-color: currentColor;
+}
+
+.wpage-row__img {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: var(--off);
+}
+
+.wpage-row__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.wpage-row:hover .wpage-row__img img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .wpage-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 48px 0;
+  }
+
+  .wpage-row__img { order: -1; }
+  .wpage-row__desc { max-width: 100%; }
+}

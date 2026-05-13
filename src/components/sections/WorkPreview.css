@@ -1,0 +1,133 @@
+.work-preview {
+  background: var(--white);
+  padding: var(--section-pad) 0;
+}
+
+/* ── Header ───────────────────────────────────────── */
+.work-preview__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 64px;
+  gap: 32px;
+}
+
+.wp-see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(19, 25, 43, 0.25);
+  transition: color 0.25s, border-color 0.25s;
+}
+.wp-see-all:hover {
+  color: var(--navy);
+  border-color: var(--navy);
+  opacity: 0.6;
+}
+
+/* ── Card grid ────────────────────────────────────── */
+.wp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ── Card ─────────────────────────────────────────── */
+.wp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Device frame */
+.wp-card__frame {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.wp-card__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.wp-card:hover .wp-card__frame img {
+  transform: scale(1.03);
+}
+
+/* Footer row */
+.wp-card__footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 4px;
+}
+
+.wp-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wp-card__name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.wp-card__desc {
+  font-size: 0.85rem;
+  color: rgba(19, 25, 43, 0.45);
+  line-height: 1.6;
+}
+
+/* Arrow button */
+.wp-card__btn {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, background 0.25s;
+  margin-top: 2px;
+}
+.wp-card__btn:hover {
+  transform: scale(1.08) rotate(5deg);
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .work-preview__header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .wp-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .wp-card__desc {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,78 @@
+.values {
+  background: var(--white);
+  padding: var(--section-pad) 0;
+}
+
+.values__heading {
+  color: var(--navy);
+  margin-bottom: 48px;
+}
+
+/* ── Card grid ────────────────────────────────────── */
+.values__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.value-card {
+  padding: 32px 28px;
+  background: #f8f8f8;
+  border: 1px solid #ebebeb;
+  border-radius: 16px;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+
+.value-card:hover {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+
+/* ── Icon box ─────────────────────────────────────── */
+.value-card__icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--white);
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  color: var(--navy);
+  margin-bottom: 28px;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.value-card:hover .value-card__icon-box {
+  background: var(--white);
+  border-color: #e0e0e0;
+}
+
+/* ── Text ─────────────────────────────────────────── */
+.value-card__title {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
+  transition: color 0.25s;
+}
+
+.value-card__desc {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.7;
+  transition: color 0.25s;
+}
+
+.value-card:hover .value-card__title,
+.value-card:hover .value-card__desc {
+  color: var(--navy);
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .values__grid {
+    grid-template-columns: 1fr;
+  }
+}

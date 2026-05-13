@@ -1,0 +1,96 @@
+.manifesto {
+  background: var(--white);
+  padding-top: var(--section-pad);
+  padding-bottom: 56px;
+}
+
+/* ── Split layout ─────────────────────────────────── */
+.manifesto__split {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 64px;
+  align-items: start;
+  padding-bottom: 80px;
+}
+
+.manifesto__aside {
+  padding-top: 6px;
+}
+
+.manifesto__quote {
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 4.5vw, 4.5rem); /* matches text-7xl on hero */
+  font-weight: 300;                       /* matches "Studio" font-light */
+  letter-spacing: -0.025em;              /* matches tracking-tight */
+  line-height: 1.15;
+  color: var(--navy);
+  margin: 0;
+}
+
+/* ── Divider ──────────────────────────────────────── */
+.manifesto__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(19, 25, 43, 0.1);
+  margin-bottom: 24px;
+}
+
+/* ── Logos ────────────────────────────────────────── */
+.manifesto__trusted {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--navy);
+  opacity: 0.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 36px 0 24px;
+}
+
+.manifesto__track-wrapper {
+  overflow: hidden;
+}
+
+.manifesto__track {
+  display: flex;
+  width: max-content;
+  animation: logos-scroll 22s linear infinite;
+}
+
+.manifesto__track:hover {
+  animation-play-state: paused;
+}
+
+.manifesto__item {
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+  flex-shrink: 0;
+}
+
+.manifesto__item img {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+}
+
+@keyframes logos-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .manifesto__split {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 56px;
+  }
+
+  .manifesto__item {
+    padding: 0 32px;
+  }
+
+  .manifesto__item img {
+    height: 22px;
+  }
+}

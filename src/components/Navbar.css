@@ -1,0 +1,71 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 0;
+  transition: background 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar--scrolled {
+  background: var(--white);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(19, 25, 43, 0.1);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.navbar__links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  transition: color 0.2s;
+}
+
+.navbar__links a:hover,
+.navbar__links a.active {
+  color: var(--white);
+}
+
+.navbar--scrolled .navbar__links a {
+  color: rgba(19, 25, 43, 0.6);
+}
+
+.navbar--scrolled .navbar__links a:hover,
+.navbar--scrolled .navbar__links a.active {
+  color: var(--navy);
+}
+
+.navbar__cta {
+  padding: 10px 22px !important;
+  font-size: 0.85rem !important;
+  color: var(--navy) !important;
+}
+
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar__links { display: none; }
+}
