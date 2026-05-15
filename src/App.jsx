@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -15,6 +15,7 @@ function ScrollToTop() {
 function PublicLayout() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <main>
         <Outlet />
@@ -24,17 +25,14 @@ function PublicLayout() {
   )
 }
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/contact" element={<Contact />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
+export const routes = [
+  {
+    path: '/',
+    element: <PublicLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'work', element: <Work /> },
+      { path: 'contact', element: <Contact /> },
+    ],
+  },
+]
