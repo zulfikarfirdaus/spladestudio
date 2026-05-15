@@ -20,10 +20,12 @@
   gap: 20px;
 }
 
-.contact__label {
+.label.contact__label {
+  display: block;
   color: var(--lime);
-  align-self: flex-start;
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
 
 .contact__links {

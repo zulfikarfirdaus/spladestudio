@@ -160,7 +160,7 @@ export function HeroContent() {
             See our work
           </button>
           <Link to="/contact" className="shader-btn shader-btn-solid">
-            Start a project
+            Get in touch
           </Link>
         </div>
       </div>

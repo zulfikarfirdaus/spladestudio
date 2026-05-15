@@ -115,6 +115,10 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.1; }
 .btn-dark:hover {
   background: #1c2540;
 }
+.btn:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
 
 /* ── Tag ───────────────────────────────────────────────────── */
 .tag {

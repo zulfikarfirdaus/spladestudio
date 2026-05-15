@@ -68,9 +68,24 @@
 }
 
 .manifesto__item img {
-  height: 26px;
+  height: 40px;
   width: auto;
   object-fit: contain;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.manifesto__item:hover img {
+  opacity: 0.75;
+}
+
+.manifesto__item--bitmap img {
+  filter: grayscale(1) brightness(0.15);
+  opacity: 0.6;
+}
+
+.manifesto__item--bitmap:hover img {
+  opacity: 0.9;
 }
 
 @keyframes logos-scroll {
@@ -91,6 +106,7 @@
   }
 
   .manifesto__item img {
-    height: 22px;
+    height: auto;
+    max-height: 36px;
   }
 }

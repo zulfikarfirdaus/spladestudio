@@ -23,7 +23,7 @@ export default function Navbar() {
         </Link>
 
         <nav className="navbar__links">
-          <NavLink to="/contact" className="btn btn-primary navbar__cta">Start a project</NavLink>
+          <NavLink to="/contact" className="btn btn-primary navbar__cta">Get in touch</NavLink>
         </nav>
       </div>
     </header>

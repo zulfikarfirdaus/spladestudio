@@ -41,3 +41,7 @@
 .shader-btn-solid:hover {
   opacity: 0.88;
 }
+.shader-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}

@@ -26,7 +26,7 @@ export default function Statement() {
       <div className="manifesto__track-wrapper">
         <div className="manifesto__track">
           {logos.map((c, i) => (
-            <div className="manifesto__item" key={i}>
+            <div className={`manifesto__item${c.bitmap ? ' manifesto__item--bitmap' : ''}`} key={i}>
               <img src={c.logo} alt={c.name} style={c.height ? { height: c.height } : undefined} />
             </div>
           ))}
