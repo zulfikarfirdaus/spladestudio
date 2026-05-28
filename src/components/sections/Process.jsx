@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import imgAgreement from '../../assets/process-agreement.png'
-import imgDesign from '../../assets/process-design.png'
-import imgApproval from '../../assets/process-approval.png'
+import imgAgreement from '../../assets/process-agreement.webp'
+import imgDesign from '../../assets/process-design.webp'
+import imgApproval from '../../assets/process-approval.webp'
 import './Process.css'
 
 gsap.registerPlugin(ScrollTrigger)

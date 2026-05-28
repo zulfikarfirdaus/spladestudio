@@ -19,7 +19,7 @@ export const projects = [
     desc: 'Professional multi-page site for a construction company.',
     tags: ['Multi-page Website', 'Web Development'],
     url: 'tara-build.com',
-    image: '/images/tara.png',
+    image: '/images/tara.webp',
   },
   {
     name: 'Yayasan Al-Amanah',
