@@ -87,6 +87,7 @@ export default function Contact() {
       })
       if (res.ok) {
         setStatus('success')
+        setForm(INITIAL)
       } else {
         setStatus('error')
       }
