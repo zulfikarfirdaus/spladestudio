@@ -1,17 +1,45 @@
 export const projects = [
   {
+    name: 'Capstify',
+    desc: 'Bold streetwear e-commerce site for a premium headwear brand.',
+    tags: ['E-commerce', 'Web Development'],
+    url: 'capstify.com',
+    image: '/images/capstify.jpg',
+  },
+  {
+    name: 'Motherlight Birth Center',
+    desc: 'Warm, welcoming website for a gentle birth clinic in Karanganyar.',
+    tags: ['Multi-page Website', 'Web Development'],
+    url: 'motherlight.co.id',
+    image: '/images/motherlight.jpg',
+  },
+  {
+    name: 'Al-Khair Investment',
+    desc: 'Dark, confident website for a shariah-based business funding platform.',
+    tags: ['Landing Page', 'Web Development'],
+    url: 'alkhair-investment.com',
+    image: '/images/alkhair.jpg',
+  },
+  {
     name: "d'BestO",
     desc: 'Revamped the F&B brand website with bold and clean design.',
     tags: ['Landing Page', 'Web Development'],
     url: 'dbesto.co.id',
-    image: '/images/dbesto.webp',
+    image: '/images/dbesto.jpg',
+  },
+  {
+    name: 'Ventop',
+    desc: 'Clean B2B-focused website for a cap brand targeting wholesale and business buyers.',
+    tags: ['Landing Page', 'Web Development'],
+    url: 'mediumvioletred-gnu-103858.hostingersite.com',
+    image: '/images/ventop.jpg',
   },
   {
     name: 'Childreams Studio',
     desc: 'Vibrant and engaging website for a children\'s book & animation studio.',
     tags: ['Web Design', 'Web Development'],
     url: 'childreamsstudio.com',
-    image: '/images/childreams.webp',
+    image: '/images/childreams.jpg',
     objectPosition: 'center',
   },
   {
@@ -26,7 +54,7 @@ export const projects = [
     desc: 'Clean, trustworthy website for a school foundation in Bandung.',
     tags: ['Web Design', 'Web Development'],
     url: 'sekolahalamanah.sch.id',
-    image: '/images/al-amanah.webp',
+    image: '/images/alamanah.jpg',
   },
 ]
 

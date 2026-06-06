@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -28,11 +29,11 @@ export default function WorkPreview() {
       <div className="container">
 
         <div className="work-preview__header">
-          <h2 className="heading-lg">Explore our<br />selected works.</h2>
+          <h2 className="heading-lg">Explore our<br />selected projects.</h2>
         </div>
 
         <div className="wp-grid">
-          {projects.map((p) => (
+          {projects.slice(0, 4).map((p) => (
             <div className="wp-card" key={p.name}>
 
               <a
@@ -62,6 +63,12 @@ export default function WorkPreview() {
 
             </div>
           ))}
+        </div>
+
+        <div className="wp-footer">
+          <Link to="/work" className="btn wp-see-all-btn">
+            See all projects <ArrowUpRight size={15} />
+          </Link>
         </div>
 
       </div>

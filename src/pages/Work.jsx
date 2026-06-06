@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projects } from '../data/portfolio'
 import LogoStrip from '../components/sections/LogoStrip'
 import CTA from '../components/sections/CTA'
+import '../components/sections/WorkPreview.css'
 import './Work.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -13,25 +14,28 @@ export default function Work() {
   const pageRef = useRef(null)
 
   useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReduced) {
+      gsap.set('.work-hero__content > *', { opacity: 1, y: 0 })
+      gsap.set('.wp-card', { opacity: 1, y: 0 })
+      return
+    }
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.work-hero__content > *',
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out' }
+        { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out' }
       )
 
-      gsap.utils.toArray('.wpage-row').forEach((row) => {
-        const info = row.querySelector('.wpage-row__info')
-        const img  = row.querySelector('.wpage-row__img')
-        gsap.fromTo(info,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out',
-            scrollTrigger: { trigger: row, start: 'top 80%' } }
-        )
-        gsap.fromTo(img,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out',
-            scrollTrigger: { trigger: row, start: 'top 80%' } }
+      gsap.utils.toArray('.wp-card').forEach((card, i) => {
+        gsap.fromTo(card,
+          { opacity: 0, y: 48 },
+          {
+            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: i * 0.05,
+            scrollTrigger: { trigger: card, start: 'top 85%' },
+          }
         )
       })
     }, pageRef)
@@ -41,53 +45,49 @@ export default function Work() {
 
   return (
     <div ref={pageRef}>
-      {/* Hero */}
       <section className="work-hero">
         <div className="container work-hero__content">
-          <p className="label work-hero__eyebrow">Our work</p>
-          <h1 className="work-hero__heading">
-            What we've built.
-          </h1>
+          <p className="label work-hero__eyebrow">Our projects</p>
+          <h1 className="work-hero__heading">What we've built.</h1>
           <p className="work-hero__sub">
-            Every project is custom — designed and built around the brand, not the other way around.
+            Every project is custom: designed and built around the brand, not the other way around.
           </p>
+
         </div>
       </section>
 
-      {/* Row list */}
       <section className="wpage-list">
         <div className="container">
-          <div className="wpage-rows">
+          <div className="wp-grid">
             {projects.map((p) => (
-              <div className="wpage-row" key={p.name}>
-                <div className="wpage-row__info">
-                  <h2 className="wpage-row__name">{p.name}</h2>
-                  <p className="wpage-row__desc">{p.desc}</p>
-                  <div className="wpage-row__tags">
-                    {p.tags.map(t => (
-                      <span className="tag tag-plain" key={t}>{t}</span>
-                    ))}
+              <div className="wp-card" key={p.name}>
+                <a
+                  href={`https://${p.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wp-card__frame"
+                >
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined}
+                  />
+                </a>
+                <div className="wp-card__footer">
+                  <div className="wp-card__text">
+                    <h3 className="wp-card__name">{p.name}</h3>
+                    <p className="wp-card__desc">{p.desc}</p>
                   </div>
                   <a
                     href={`https://${p.url}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="wpage-row__visit"
+                    className="wp-card__btn"
+                    aria-label={`Visit ${p.name}`}
                   >
-                    Visit site <ArrowUpRight size={14} />
+                    <ArrowUpRight size={18} />
                   </a>
                 </div>
-
-                <a
-                  href={`https://${p.url}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="wpage-row__img"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                >
-                  <img src={p.image} alt={p.name} />
-                </a>
               </div>
             ))}
           </div>

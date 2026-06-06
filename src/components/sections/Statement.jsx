@@ -1,5 +1,6 @@
 import { clients } from '../../data/portfolio'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import BlurText from '../ui/BlurText'
 import './Statement.css'
 
 const logos = [...clients, ...clients]
@@ -14,11 +15,15 @@ export default function Statement() {
           <div className="manifesto__aside">
             <span className="label">Our philosophy</span>
           </div>
-          <p className="manifesto__quote">
-            We believe great design isn&rsquo;t decoration; it&rsquo;s the product.
-            Every pixel, every line of code, every interaction is built with intention.
-            We don&rsquo;t ship templates. We ship conviction.
-          </p>
+          <BlurText
+            text="We believe great design isn't decoration; it's the product. Every pixel, every line of code, every interaction is built with intention. We don't ship templates. We ship conviction."
+            className="manifesto__quote"
+            animateBy="words"
+            direction="bottom"
+            delay={60}
+            stepDuration={0.4}
+            threshold={0.2}
+          />
         </div>
         <div className="manifesto__divider" />
         <p className="manifesto__trusted">Trusted by businesses from various industry</p>

@@ -157,7 +157,7 @@ export function HeroContent() {
             className="shader-btn shader-btn-outline"
             onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            See our work
+            See our projects
           </button>
           <Link to="/contact" className="shader-btn shader-btn-solid">
             Get in touch

@@ -57,7 +57,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
   display: block;
   transition: transform 0.7s ease;
 }
@@ -112,6 +112,23 @@
 }
 .wp-card__btn:hover {
   transform: scale(1.08) rotate(5deg);
+}
+
+/* ── Footer ───────────────────────────────────────── */
+.wp-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+}
+
+.wp-see-all-btn {
+  border: 1.5px solid rgba(19, 25, 43, 0.2);
+  color: var(--navy);
+}
+.wp-see-all-btn:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--white);
 }
 
 /* ── Mobile ───────────────────────────────────────── */
