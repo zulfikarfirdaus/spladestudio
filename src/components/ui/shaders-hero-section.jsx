@@ -11,7 +11,7 @@ export function ShaderBackground({ children, playing = true }) {
     <div
       ref={containerRef}
       className="min-h-screen w-full relative overflow-hidden"
-      style={{ contain: 'layout style', background: '#000' }}
+      style={{ background: 'radial-gradient(ellipse 100% 65% at 10% 100%, #1a5c20 0%, #0a2e10 40%, #000 80%)' }}
     >
       {/* SVG Filters */}
       <svg className="absolute inset-0 w-0 h-0">
