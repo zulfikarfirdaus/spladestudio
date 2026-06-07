@@ -11,7 +11,7 @@ export function ShaderBackground({ children, playing = true }) {
     <div
       ref={containerRef}
       className="min-h-screen w-full relative overflow-hidden"
-      style={{ contain: 'layout style' }}
+      style={{ contain: 'layout style', background: '#000' }}
     >
       {/* SVG Filters */}
       <svg className="absolute inset-0 w-0 h-0">
