@@ -14,9 +14,10 @@ export default function Footer() {
           </div>
 
           <nav className="footer__nav">
-            <Link to="/contact">Contact</Link>
+            <Link to="/work">Projects</Link>
+            <a href="https://wa.me/6281217398515" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="mailto:spladestudio@gmail.com">Email</a>
             <a href="https://www.instagram.com/spladestudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="mailto:hello@spladestudio.com">Email</a>
           </nav>
         </div>
 

@@ -76,11 +76,15 @@
 
 /* ── Mobile ───────────────────────────────────────── */
 @media (max-width: 768px) {
+  .logos__headline {
+    padding: 28px 0 28px;
+  }
+
   .logos__item {
     padding: 0 36px;
   }
 
   .logos__item img {
-    height: 22px;
+    height: 36px;
   }
 }
