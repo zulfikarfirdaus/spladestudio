@@ -1,20 +1,21 @@
 /* ── Hero background ────────────────────────────────── */
 .hero-bg {
   background:
-    radial-gradient(ellipse 110% 70% at 10% 100%, #1a5c20 0%, #0a2e10 38%, #000 72%),
-    radial-gradient(ellipse 50% 45% at 75% 15%, #0d3d14 0%, transparent 65%);
+    radial-gradient(ellipse 160% 100% at -10% 110%, #2d7a35 0%, #1a5020 25%, #0a2e10 55%, #000 85%);
 }
 
 .hero-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 55% 45% at 20% 90%, rgba(185, 230, 0, 0.07) 0%, transparent 70%);
-  animation: hero-breathe 7s ease-in-out infinite;
+  background:
+    radial-gradient(ellipse 70% 60% at 5% 95%, rgba(45, 122, 53, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 60% 10%, rgba(13, 61, 20, 0.4) 0%, transparent 60%);
+  animation: hero-breathe 6s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes hero-breathe {
-  0%, 100% { opacity: 0.6; }
+  0%, 100% { opacity: 0.7; }
   50%       { opacity: 1; }
 }
 
