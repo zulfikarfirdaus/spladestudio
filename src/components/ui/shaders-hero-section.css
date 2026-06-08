@@ -1,13 +1,48 @@
-@media (max-width: 768px) {
-  .pulsing-circle {
-    display: none;
-  }
-
-  .hero-br {
-    display: none;
-  }
+/* ── Hero background ────────────────────────────────── */
+.hero-bg {
+  background:
+    radial-gradient(ellipse 110% 70% at 10% 100%, #1a5c20 0%, #0a2e10 38%, #000 72%),
+    radial-gradient(ellipse 50% 45% at 75% 15%, #0d3d14 0%, transparent 65%);
 }
 
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 20% 90%, rgba(185, 230, 0, 0.07) 0%, transparent 70%);
+  animation: hero-breathe 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-breathe {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* ── Pulsing orb (replaces PulsingBorder WebGL) ─────── */
+.orb-pulse {
+  background: conic-gradient(
+    from 0deg,
+    #00FF88, #FFD700, #FF4C3E, #E77EDC,
+    #BEECFF, #8A2BE2, #FF6B35, #00FF88
+  );
+  box-shadow:
+    0 0 24px rgba(0, 255, 136, 0.5),
+    0 0 50px rgba(0, 255, 136, 0.2);
+  animation: orb-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes orb-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.07); }
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .pulsing-circle { display: none; }
+  .hero-br        { display: none; }
+}
+
+/* ── Buttons ────────────────────────────────────────── */
 .shader-btn {
   display: inline-flex;
   align-items: center;
@@ -38,9 +73,8 @@
   background: #ffffff;
   color: #000000;
 }
-.shader-btn-solid:hover {
-  opacity: 0.88;
-}
+.shader-btn-solid:hover { opacity: 0.88; }
+
 .shader-btn:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: 3px;
