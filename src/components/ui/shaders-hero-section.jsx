@@ -11,7 +11,7 @@ export function ShaderBackground({ children, playing = true }) {
     <div
       ref={containerRef}
       className="min-h-screen w-full relative overflow-hidden"
-      style={{ contain: 'layout style', background: 'radial-gradient(ellipse 140% 90% at 0% 100%, #1a5020 0%, #0a2e10 40%, #000 75%)' }}
+      style={{ contain: 'layout style', background: '#000' }}
     >
       {/* SVG Filters */}
       <svg className="absolute inset-0 w-0 h-0">
@@ -145,12 +145,9 @@ export function HeroContent() {
         </p>
 
         <div className="flex items-center flex-wrap" style={{ gap: '16px' }}>
-          <button
-            className="shader-btn shader-btn-outline"
-            onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
-          >
+          <Link to="/work" className="shader-btn shader-btn-outline">
             See our projects
-          </button>
+          </Link>
           <Link to="/contact" className="shader-btn shader-btn-solid">
             Get in touch
           </Link>

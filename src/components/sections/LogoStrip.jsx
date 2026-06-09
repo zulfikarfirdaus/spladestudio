@@ -12,8 +12,8 @@ export default function LogoStrip() {
       <div className="logos__track-wrapper">
         <div className="logos__track">
           {logos.map((c, i) => (
-            <div className="logos__item" key={i}>
-              <img src={c.logo} alt={c.name} />
+            <div className={`logos__item${c.bitmap ? ' logos__item--bitmap' : ''}`} key={i}>
+              <img src={c.logo} alt={c.name} style={c.height ? { height: c.height } : undefined} />
             </div>
           ))}
         </div>

@@ -10,9 +10,9 @@
   max-width: 900px;
 }
 
-/* Fix label border: dark border is invisible on dark bg */
 .work-hero .label {
-  border-color: rgba(255, 255, 255, 0.18);
+  border: none;
+  padding: 0;
 }
 
 .work-hero__eyebrow {
