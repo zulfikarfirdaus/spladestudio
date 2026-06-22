@@ -4,19 +4,19 @@ import './ValueProps.css'
 
 const props = [
   {
-    icon: <Zap size={20} />,
-    title: 'Fast',
-    desc: '2-week delivery from agreement to launch. No endless back-and-forth.',
-  },
-  {
     icon: <Layers size={20} />,
-    title: 'Quality',
+    title: 'Crafted, not templated',
     desc: 'Custom-designed and built for your brand. Not a template with a logo swap.',
   },
   {
     icon: <Settings size={20} />,
     title: 'Flexible',
     desc: "Need a custom feature or CMS? We'll discuss it and build exactly what you need.",
+  },
+  {
+    icon: <Zap size={20} />,
+    title: 'Fast',
+    desc: '2-week delivery from agreement to launch. No endless back-and-forth.',
   },
 ]
 
@@ -26,7 +26,7 @@ export default function ValueProps() {
   return (
     <section className="values">
       <div className="container">
-        <h2 className="heading-lg values__heading">Built different.<br />Delivered fast.</h2>
+        <h2 className="heading-lg values__heading">Built different.<br />Made to last.</h2>
         <div className="values__grid">
           {props.map((p) => (
             <div className="value-card reveal" key={p.title}>

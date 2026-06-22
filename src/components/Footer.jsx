@@ -10,7 +10,7 @@ export default function Footer() {
             <Link to="/">
               <img src="/images/logo-white.svg" alt="Splade Studio" className="footer__logo-img" />
             </Link>
-            <p className="footer__tagline">Custom websites. Delivered fast.</p>
+            <p className="footer__tagline">Custom websites, built to last.</p>
           </div>
 
           <nav className="footer__nav">

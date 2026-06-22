@@ -2,6 +2,7 @@ import { PulsingBorder, MeshGradient } from "@paper-design/shaders-react"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { useRef } from "react"
+import { Sparkle } from "lucide-react"
 import './shaders-hero-section.css'
 
 export function ShaderBackground({ children, playing = true }) {
@@ -122,8 +123,9 @@ export function HeroContent() {
           style={{ filter: "url(#glass-effect)", padding: '8px 18px', marginBottom: '24px' }}
         >
           <div className="absolute top-0 left-1 right-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full" />
-          <span className="text-white/90 text-sm font-light relative z-10">
-            ✨ Custom websites for business
+          <span className="inline-flex items-center text-white/90 text-sm font-light relative z-10" style={{ gap: '8px' }}>
+            <Sparkle size={14} className="text-white/70" />
+            Custom websites for business
           </span>
         </div>
 
@@ -140,8 +142,8 @@ export function HeroContent() {
         <p className="text-sm font-light text-white/70 leading-relaxed"
           style={{ marginBottom: '32px' }}
         >
-          We craft custom websites that help businesses grow and stand out.<br className="hero-br" />
-          {' '}No templates. No shortcuts. Quality delivered in 2 weeks.
+          We craft custom websites that help businesses stand out.<br className="hero-br" />
+          {' '}Designed with taste, built to last — no templates, no shortcuts.
         </p>
 
         <div className="flex items-center flex-wrap" style={{ gap: '16px' }}>
