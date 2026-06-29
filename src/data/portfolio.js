@@ -21,11 +21,11 @@ export const projects = [
     image: '/images/alkhair.jpg',
   },
   {
-    name: "d'BestO",
-    desc: 'Revamped the F&B brand website with bold and clean design.',
+    name: 'JuanUp 2026',
+    desc: 'Modern, energetic website for the JuanUp 2026 program.',
     tags: ['Landing Page', 'Web Development'],
-    url: 'dbesto.co.id',
-    image: '/images/dbesto.jpg',
+    url: 'juanup.juan.ac',
+    image: '/images/juanup.jpg',
   },
   {
     name: 'Ventop',
@@ -33,6 +33,13 @@ export const projects = [
     tags: ['Landing Page', 'Web Development'],
     url: 'mediumvioletred-gnu-103858.hostingersite.com',
     image: '/images/ventop.jpg',
+  },
+  {
+    name: "d'BestO",
+    desc: 'Revamped the F&B brand website with bold and clean design.',
+    tags: ['Landing Page', 'Web Development'],
+    url: 'dbesto.co.id',
+    image: '/images/dbesto.jpg',
   },
   {
     name: 'Childreams Studio',
