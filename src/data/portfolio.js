@@ -1,12 +1,5 @@
 export const projects = [
   {
-    name: 'Capstify',
-    desc: 'Bold streetwear e-commerce site for a premium headwear brand.',
-    tags: ['E-commerce', 'Web Development'],
-    url: 'capstify.com',
-    image: '/images/capstify.jpg',
-  },
-  {
     name: 'Motherlight Birth Center',
     desc: 'Warm, welcoming website for a gentle birth clinic in Karanganyar.',
     tags: ['Multi-page Website', 'Web Development'],
@@ -26,6 +19,13 @@ export const projects = [
     tags: ['Landing Page', 'Web Development'],
     url: 'juanup.juan.ac',
     image: '/images/juanup.jpg',
+  },
+  {
+    name: 'Capstify',
+    desc: 'Bold streetwear e-commerce site for a premium headwear brand.',
+    tags: ['E-commerce', 'Web Development'],
+    url: 'capstify.splade-studio.workers.dev',
+    image: '/images/capstify.jpg',
   },
   {
     name: 'Ventop',
