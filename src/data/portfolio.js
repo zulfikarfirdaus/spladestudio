@@ -21,11 +21,11 @@ export const projects = [
     image: '/images/juanup.jpg',
   },
   {
-    name: 'Capstify',
-    desc: 'Bold streetwear e-commerce site for a premium headwear brand.',
-    tags: ['E-commerce', 'Web Development'],
-    url: 'capstify.splade-studio.workers.dev',
-    image: '/images/capstify.jpg',
+    name: "d'BestO",
+    desc: 'Revamped the F&B brand website with bold and clean design.',
+    tags: ['Landing Page', 'Web Development'],
+    url: 'dbesto.co.id',
+    image: '/images/dbesto.jpg',
   },
   {
     name: 'Ventop',
@@ -33,13 +33,6 @@ export const projects = [
     tags: ['Landing Page', 'Web Development'],
     url: 'mediumvioletred-gnu-103858.hostingersite.com',
     image: '/images/ventop.jpg',
-  },
-  {
-    name: "d'BestO",
-    desc: 'Revamped the F&B brand website with bold and clean design.',
-    tags: ['Landing Page', 'Web Development'],
-    url: 'dbesto.co.id',
-    image: '/images/dbesto.jpg',
   },
   {
     name: 'Childreams Studio',
@@ -62,6 +55,13 @@ export const projects = [
     tags: ['Web Design', 'Web Development'],
     url: 'sekolahalamanah.sch.id',
     image: '/images/alamanah.jpg',
+  },
+  {
+    name: 'Capstify',
+    desc: 'Bold streetwear e-commerce site for a premium headwear brand.',
+    tags: ['E-commerce', 'Web Development'],
+    url: 'capstify.splade-studio.workers.dev',
+    image: '/images/capstify.jpg',
   },
 ]
 
