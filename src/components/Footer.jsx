@@ -23,6 +23,7 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <p>© 2026 Splade Studio. All rights reserved.</p>
+          <p className="footer__entity">A brand of PT Pedang Bermata Dua</p>
         </div>
       </div>
     </footer>
