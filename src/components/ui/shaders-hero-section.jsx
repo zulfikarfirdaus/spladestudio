@@ -1,9 +1,24 @@
-import { PulsingBorder, MeshGradient } from "@paper-design/shaders-react"
-import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { useRef } from "react"
-import { Sparkle } from "lucide-react"
+import { Suspense, lazy, useRef, useSyncExternalStore } from "react"
 import './shaders-hero-section.css'
+
+// Both pull in @paper-design/shaders-react (WebGL) and/or framer-motion.
+// Lazy-loading keeps those out of the critical bundle so the hero's text
+// (the actual LCP element) paints before the shader libs even download.
+const ShaderMesh = lazy(() => import('./ShaderMesh'))
+const PulsingCircleVisual = lazy(() => import('./PulsingCircleVisual'))
+
+function subscribeToDesktopViewport(callback) {
+  const mq = window.matchMedia('(min-width: 769px)')
+  mq.addEventListener('change', callback)
+  return () => mq.removeEventListener('change', callback)
+}
+function getIsDesktopViewport() {
+  return window.matchMedia('(min-width: 769px)').matches
+}
+function getIsDesktopViewportServer() {
+  return false
+}
 
 export function ShaderBackground({ children, playing = true }) {
   const containerRef = useRef(null)
@@ -42,13 +57,14 @@ export function ShaderBackground({ children, playing = true }) {
         </defs>
       </svg>
 
-      <MeshGradient
-        className="absolute inset-0 w-full h-full"
-        colors={["#000000", "#0a2e10", "#B9E600", "#041808", "#1a5020"]}
-        speed={0.12}
-        backgroundColor="#000000"
-        playing={playing}
-      />
+      <Suspense fallback={<div className="absolute inset-0 w-full h-full shader-mesh-fallback" />}>
+        <ShaderMesh
+          colors={["#000000", "#0a2e10", "#B9E600", "#041808", "#1a5020"]}
+          speed={0.12}
+          backgroundColor="#000000"
+          playing={playing}
+        />
+      </Suspense>
 
       {children}
     </div>
@@ -56,59 +72,25 @@ export function ShaderBackground({ children, playing = true }) {
 }
 
 export function PulsingCircle({ playing = true }) {
-  const CONTAINER_SIZE  = 140
-  const BORDER_SIZE     = 100
-  const SVG_SCALE       = 1.5
-  const TEXT_RADIUS     = 38
-  const TEXT_SIZE       = 7
-  const SPIN_DURATION   = 22
-  const CIRCUMFERENCE   = +(2 * Math.PI * TEXT_RADIUS).toFixed(2)
+  const CONTAINER_SIZE = 140
+  // shaders-hero-section.css hides .pulsing-circle below 768px — skip
+  // fetching the shader/framer-motion chunk on mobile entirely.
+  const showOnDesktop = useSyncExternalStore(
+    subscribeToDesktopViewport,
+    getIsDesktopViewport,
+    getIsDesktopViewportServer
+  )
+
+  if (!showOnDesktop) return null
 
   return (
     <div className="pulsing-circle absolute bottom-8 right-8 z-30">
       <div className="relative flex items-center justify-center"
         style={{ width: `${CONTAINER_SIZE}px`, height: `${CONTAINER_SIZE}px` }}
       >
-        <PulsingBorder
-          colors={["#BEECFF", "#E77EDC", "#FF4C3E", "#00FF88", "#FFD700", "#FF6B35", "#8A2BE2"]}
-          colorBack="#00000000"
-          speed={1}
-          roundness={1}
-          thickness={0.1}
-          softness={0.2}
-          intensity={3}
-          spotsPerColor={3}
-          spotSize={0.1}
-          pulse={0.1}
-          smoke={0.2}
-          smokeSize={2}
-          scale={0.65}
-          rotation={0}
-          frame={9161408.251009725}
-          playing={playing}
-          style={{ width: `${BORDER_SIZE}px`, height: `${BORDER_SIZE}px`, borderRadius: "50%" }}
-        />
-
-        <motion.svg
-          className="absolute inset-0 w-full h-full"
-          viewBox="0 0 100 100"
-          animate={{ rotate: 360 }}
-          transition={{ duration: SPIN_DURATION, repeat: Infinity, ease: "linear" }}
-          style={{ transform: `scale(${SVG_SCALE})` }}
-        >
-          <defs>
-            <path
-              id="topo-circle"
-              d={`M 50,50 m -${TEXT_RADIUS},0 a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 ${TEXT_RADIUS * 2},0 a ${TEXT_RADIUS},${TEXT_RADIUS} 0 1,1 -${TEXT_RADIUS * 2},0`}
-            />
-          </defs>
-          <text fontSize={TEXT_SIZE} fill="rgba(255,255,255,0.75)"
-            textLength={CIRCUMFERENCE} lengthAdjust="spacing">
-            <textPath href="#topo-circle" startOffset="0%">
-              CUSTOM DESIGN • 2-WEEK DELIVERY • CUSTOM FEATURE •
-            </textPath>
-          </text>
-        </motion.svg>
+        <Suspense fallback={null}>
+          <PulsingCircleVisual playing={playing} />
+        </Suspense>
       </div>
     </div>
   )
@@ -124,7 +106,6 @@ export function HeroContent() {
         >
           <div className="absolute top-0 left-1 right-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full" />
           <span className="inline-flex items-center text-white/90 text-sm font-light relative z-10" style={{ gap: '8px' }}>
-            <Sparkle size={14} className="text-white/70" />
             Custom websites for business
           </span>
         </div>

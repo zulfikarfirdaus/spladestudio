@@ -1,3 +1,7 @@
+.shader-mesh-fallback {
+  background: radial-gradient(circle at 30% 20%, #1a5020 0%, #0a2e10 35%, #000000 75%);
+}
+
 /* ── Mobile ─────────────────────────────────────────── */
 @media (max-width: 768px) {
   .pulsing-circle {

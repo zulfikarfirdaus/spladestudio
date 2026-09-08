@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Mail } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
+import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import gsap from 'gsap'
 import './Contact.css'
+
+// Secondary CTA — for prospects who'd rather talk it through than fill the form.
+const BOOKING_URL = 'https://calendar.app.google/o8vaKgZTwKac9kE46'
 
 function IconInstagram() {
   return (
@@ -39,7 +43,12 @@ const INITIAL = {
 }
 
 export default function Contact() {
-  const [form, setForm] = useState(INITIAL)
+  const [searchParams] = useSearchParams()
+  // Arriving from a pricing card: carry the chosen package into the form.
+  const preset = searchParams.get('service')
+  const [form, setForm] = useState(
+    services.includes(preset) ? { ...INITIAL, service: preset } : INITIAL
+  )
   const [emailError, setEmailError] = useState('')
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const pageRef = useRef(null)
@@ -118,17 +127,21 @@ export default function Contact() {
               Tell me about your project and I'll get back to you within 24 hours.
             </p>
             <div className="contact__links">
-              <a href="https://wa.me/6281217398515" target="_blank" rel="noopener noreferrer" className="contact__email">
-                <IconWhatsApp />
-                Send WhatsApp
-              </a>
               <a href="mailto:spladestudio@gmail.com" className="contact__email">
                 <Mail size={16} />
                 Send Email
               </a>
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="contact__email">
+                <Calendar size={16} />
+                Book a call
+              </a>
               <a href="https://www.instagram.com/spladestudio/" target="_blank" rel="noopener noreferrer" className="contact__email">
                 <IconInstagram />
                 @spladestudio
+              </a>
+              <a href="https://wa.me/6281217398515" target="_blank" rel="noopener noreferrer" className="contact__email">
+                <IconWhatsApp />
+                Send WhatsApp
               </a>
             </div>
           </div>

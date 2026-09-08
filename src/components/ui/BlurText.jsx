@@ -22,7 +22,8 @@ const BlurText = ({
   animationTo,
   easing = t => t,
   onAnimationComplete,
-  stepDuration = 0.35
+  stepDuration = 0.35,
+  renderSegment = segment => segment
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -86,7 +87,7 @@ const BlurText = ({
             transition={spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
           >
-            {segment === ' ' ? ' ' : segment}
+            {segment === ' ' ? ' ' : renderSegment(segment, index)}
             {animateBy === 'words' && index < elements.length - 1 && ' '}
           </motion.span>
         );

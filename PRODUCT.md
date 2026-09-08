@@ -25,7 +25,7 @@ Confident, direct, craft-obsessed. Three words: conviction, precision, momentum.
 
 1. **Show, don't tell** — Let the work speak. Copy supports the work, it doesn't compensate for it.
 2. **Conviction, not hedging** — Every sentence earns its place. No qualifiers, no filler, no "we strive to."
-3. **Speed is part of the product** — The 2-week delivery promise must feel visceral in the experience itself.
+3. **Speed is part of the product** — The site itself must load and respond fast enough that the visitor feels the standard we sell. Delivery timelines are a commitment we state plainly on the pricing cards, not a claim we compete on.
 4. **Quality is consistent, not spotlit** — No section should be visually richer than another. The whole surface is the pitch.
 5. **Familiar tools, unfamiliar execution** — Use established web conventions but execute them at a level that makes the visitor notice.
 

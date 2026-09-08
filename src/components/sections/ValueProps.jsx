@@ -15,8 +15,8 @@ const props = [
   },
   {
     icon: <Zap size={20} />,
-    title: 'Fast',
-    desc: '2-week delivery from agreement to launch. No endless back-and-forth.',
+    title: 'Fast where it counts',
+    desc: 'Built for 90+ PageSpeed and clean technical SEO. A beautiful site that loads slowly loses the visitor anyway.',
   },
 ]
 
