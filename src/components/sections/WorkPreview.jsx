@@ -42,7 +42,13 @@ export default function WorkPreview() {
                 rel="noopener noreferrer"
                 className="wp-card__frame"
               >
-                <img src={p.image} alt={p.name} style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined} />
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  loading="lazy"
+                  decoding="async"
+                  style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined}
+                />
               </a>
 
               <div className="wp-card__footer">

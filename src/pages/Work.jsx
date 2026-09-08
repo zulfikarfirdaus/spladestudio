@@ -70,6 +70,8 @@ export default function Work() {
                   <img
                     src={p.image}
                     alt={p.name}
+                    loading="lazy"
+                    decoding="async"
                     style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined}
                   />
                 </a>
