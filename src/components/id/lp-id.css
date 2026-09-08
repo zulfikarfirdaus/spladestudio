@@ -1,0 +1,37 @@
+/* ID landing page (/id) — WhatsApp-specific additions.
+   Everything else reuses the existing section styles. */
+
+/* Lime (brand accent) variant of the hero solid button */
+.shader-btn-wa {
+  background: #b9e600;
+  color: #0a1a04;
+  border-color: #b9e600;
+}
+.shader-btn-wa:hover {
+  background: #a5cd00;
+  border-color: #a5cd00;
+}
+
+/* Navbar CTA as WhatsApp button */
+.navbar__cta--wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* In-page anchor nav. Hidden on mobile, where the bar keeps just logo + WhatsApp. */
+.navbar__anchors {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .navbar__anchors { display: none; }
+}
+
+/* Clear the fixed navbar when jumping to a section. */
+#work,
+#pricing {
+  scroll-margin-top: 88px;
+}

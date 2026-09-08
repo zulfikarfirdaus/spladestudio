@@ -1,0 +1,32 @@
+/* AU landing page (/au) — layout tweaks only.
+   Everything else reuses the existing section styles. */
+
+/* In-page anchor nav. Hidden on mobile, where the bar keeps just logo + CTA. */
+.navbar__anchors {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .navbar__anchors { display: none; }
+}
+
+/* Clear the fixed navbar when jumping to a section. */
+#work,
+#pricing,
+#contact {
+  scroll-margin-top: 88px;
+}
+
+/* The contact page reused as the closing section of a single-page LP:
+   drop the full-viewport height and the top padding meant to clear a
+   page-level navbar. */
+.contact-page--section {
+  min-height: 0;
+  padding: 110px 0 110px;
+}
+
+.contact-page--section .contact-hero__content {
+  top: 120px;
+}

@@ -1,0 +1,240 @@
+.pricing {
+  background: var(--white);
+  padding: var(--section-pad) 0;
+}
+
+.pricing__heading {
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.pricing__sub {
+  font-size: 0.95rem;
+  color: #6b7280;
+  max-width: 46ch;
+  margin-bottom: 48px;
+}
+
+/* ── Card grid ────────────────────────────────────── */
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.price-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px;
+  background: var(--white);
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+}
+
+/* The package we actually want sold: brighter ground, lime outline, soft glow. */
+.price-card--featured {
+  background: var(--white);
+  border: 1.5px solid var(--lime);
+  padding-top: 40px;
+  box-shadow:
+    0 0 0 5px rgba(185, 230, 0, 0.10),
+    0 18px 40px -12px rgba(185, 230, 0, 0.4),
+    0 4px 16px rgba(20, 20, 20, 0.05);
+}
+
+.price-card__badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: var(--lime);
+  color: var(--navy);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Head ─────────────────────────────────────────── */
+.price-card__name {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.price-card__for {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.65;
+  margin-bottom: 28px;
+  min-height: 2.7em;
+}
+
+.price-card__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e6e6e1;
+}
+
+.price-card__amount {
+  font-family: var(--font-body);
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--navy);
+}
+
+.price-card__amount small {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #6b7280;
+  margin-right: 6px;
+}
+
+.price-card__unit {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* ── List ─────────────────────────────────────────── */
+.price-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.price-card__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #4b5563;
+}
+
+.price-card__list svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--navy);
+}
+
+/* ── CTA ──────────────────────────────────────────── */
+.price-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 22px;
+  border-radius: 9999px;
+  border: 1.5px solid var(--navy);
+  color: var(--navy);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.price-card__cta:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.price-card__foot {
+  margin-top: auto;
+}
+
+/* Reserved even when empty, so the CTAs line up across all three cards. */
+.price-card__note {
+  margin-top: 14px;
+  min-height: 1.15em;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* ── Featured overrides ───────────────────────────── */
+.price-card--featured .price-card__cta {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--navy);
+}
+.price-card--featured .price-card__cta:hover {
+  background: #c8f500;
+  border-color: #c8f500;
+}
+
+/* ── Included strip ───────────────────────────────── */
+.pricing__included {
+  margin-top: 16px;
+  padding: 36px 32px;
+  background: var(--off);
+  border-radius: 16px;
+}
+
+.pricing__included-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.pricing__included-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 32px;
+}
+
+.pricing__included-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #4b5563;
+}
+
+.pricing__included-grid svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--navy);
+}
+
+.pricing__included-grid strong {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 1040px) {
+  .pricing__grid { grid-template-columns: 1fr; }
+  .price-card__for { min-height: 0; }
+  .pricing__included-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .pricing__included { padding: 28px 22px; }
+  .pricing__included-grid { grid-template-columns: 1fr; }
+  .price-card { padding: 28px 22px; }
+  .price-card--featured { padding-top: 38px; }
+}
