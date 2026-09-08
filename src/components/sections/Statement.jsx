@@ -40,7 +40,15 @@ export default function Statement() {
         <div className="manifesto__track">
           {logos.map((c, i) => (
             <div className={`manifesto__item${c.bitmap ? ' manifesto__item--bitmap' : ''}`} key={i}>
-              <img src={c.logo} alt={c.name} style={c.height ? { height: c.height } : undefined} />
+              <img
+                src={c.logo}
+                alt={c.name}
+                width={c.width}
+                height={c.height}
+                loading="lazy"
+                decoding="async"
+                style={c.height ? { height: c.height } : undefined}
+              />
             </div>
           ))}
         </div>

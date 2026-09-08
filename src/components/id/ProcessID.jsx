@@ -59,7 +59,14 @@ export default function ProcessID() {
           {steps.map((s) => (
             <div className="process-col" key={s.num}>
               <div className="process-col__img">
-                <img src={s.image} alt={s.title} />
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  width="1200"
+                  height="904"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="process-col__body">
                 <span className="process-col__num">{s.num}</span>

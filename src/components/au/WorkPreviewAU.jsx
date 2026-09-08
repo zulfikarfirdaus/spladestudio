@@ -47,6 +47,8 @@ export default function WorkPreviewAU() {
                 <img
                   src={p.image}
                   alt={p.name}
+                  width="960"
+                  height="600"
                   loading="lazy"
                   decoding="async"
                   style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined}

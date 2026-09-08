@@ -11,7 +11,14 @@ export default function FooterAU() {
               href="#top"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
             >
-              <img src="/images/logo-white.svg" alt="Splade Studio" className="footer__logo-img" />
+              <img
+                src="/images/logo-white.svg"
+                alt="Splade Studio"
+                className="footer__logo-img"
+                width="827"
+                height="269"
+                loading="lazy"
+              />
             </a>
             <p className="footer__tagline">Custom websites, built to last.</p>
           </div>

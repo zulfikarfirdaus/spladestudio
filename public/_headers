@@ -1,0 +1,8 @@
+# Build assets carry a content hash in the filename, so a given URL's bytes can
+# never change — cache them for a year instead of Pages' 4-hour default.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images are stable but not content-hashed; a day, revalidated, is safe.
+/images/*
+  Cache-Control: public, max-age=86400, must-revalidate

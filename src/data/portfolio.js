@@ -65,11 +65,14 @@ export const projects = [
   },
 ]
 
+// `width` is the rendered height scaled by each logo's own aspect ratio. Both
+// land on the <img> so the marquee reserves the right box before the SVG
+// arrives — without them every logo is a 0x0 box that reflows on load.
 export const clients = [
-  { name: 'Al-Amanah',   logo: '/images/logo-alamanah.svg',    height: 44 },
-  { name: "d'BestO",     logo: '/images/logo-dbesto.svg',      height: 50 },
-  { name: 'Arah Jiwa',   logo: '/images/logo-arahjiwa.svg',    height: 56 },
-  { name: 'Childreams',  logo: '/images/logo-childreams.svg',  height: 46, bitmap: true },
-  { name: 'Motherlight', logo: '/images/logo-motherlight.svg', height: 34 },
-  { name: 'Al-Khair',    logo: '/images/logo-alkhair.svg',     height: 56 },
+  { name: 'Al-Amanah',   logo: '/images/logo-alamanah.svg',    height: 44, width: 158 },
+  { name: "d'BestO",     logo: '/images/logo-dbesto.svg',      height: 50, width: 130 },
+  { name: 'Arah Jiwa',   logo: '/images/logo-arahjiwa.svg',    height: 56, width: 100 },
+  { name: 'Childreams',  logo: '/images/logo-childreams.webp', height: 46, width: 119, bitmap: true },
+  { name: 'Motherlight', logo: '/images/logo-motherlight.svg', height: 34, width: 262 },
+  { name: 'Al-Khair',    logo: '/images/logo-alkhair.svg',     height: 56, width: 107 },
 ]

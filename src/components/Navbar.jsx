@@ -45,6 +45,8 @@ export default function Navbar() {
             src={scrolled || menuOpen ? '/images/logo.webp' : '/images/logo-white.svg'}
             alt="Splade Studio"
             className="navbar__logo-img"
+            width="827"
+            height="269"
           />
         </Link>
 

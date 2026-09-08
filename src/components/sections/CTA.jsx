@@ -7,7 +7,15 @@ export default function CTA() {
     <section className="cta">
       <div className="container">
         <div className="cta__content">
-          <img src="/images/icon-white.svg" alt="" className="cta__icon" aria-hidden="true" />
+          <img
+            src="/images/icon-white.svg"
+            alt=""
+            className="cta__icon"
+            aria-hidden="true"
+            width="280"
+            height="269"
+            loading="lazy"
+          />
           <h2 className="cta__heading">Your business deserves better than a template.</h2>
           <Link to="/contact" className="cta__btn">
             Get in touch <ArrowRight size={15} strokeWidth={2} />

@@ -8,7 +8,14 @@ export default function Footer() {
         <div className="footer__inner">
           <div className="footer__brand">
             <Link to="/">
-              <img src="/images/logo-white.svg" alt="Splade Studio" className="footer__logo-img" />
+              <img
+                src="/images/logo-white.svg"
+                alt="Splade Studio"
+                className="footer__logo-img"
+                width="827"
+                height="269"
+                loading="lazy"
+              />
             </Link>
             <p className="footer__tagline">Custom websites, built to last.</p>
           </div>
