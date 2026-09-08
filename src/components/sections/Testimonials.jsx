@@ -23,7 +23,15 @@ export default function Testimonials() {
         <div className="testi__footer">
           <div className="testi__author">
             {t.avatar ? (
-              <img src={t.avatar} alt={t.name} className="testi__avatar" />
+              <img
+                src={t.avatar}
+                alt={t.name}
+                className="testi__avatar"
+                width="150"
+                height="150"
+                loading="lazy"
+                decoding="async"
+              />
             ) : (
               <div className="testi__avatar testi__avatar--placeholder">
                 {t.name.charAt(0)}
@@ -31,7 +39,7 @@ export default function Testimonials() {
             )}
             <div>
               <p className="testi__name">{t.name}</p>
-              <p className="testi__meta">{t.title} at {t.company}</p>
+              <p className="testi__meta">{t.title} at {t.category}</p>
             </div>
           </div>
 
