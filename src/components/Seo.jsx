@@ -3,6 +3,12 @@ import { Head } from 'vite-react-ssg'
 const SITE = 'https://spladestudio.com'
 const OG_IMAGE = `${SITE}/og-image.png`
 
+// og:locale wants language_TERRITORY. Our `lang` values are BCP 47, which is
+// the same information with a hyphen — except bare 'en'/'id', which need a
+// territory picked for them.
+const OG_LOCALES = { en: 'en_US', id: 'id_ID' }
+const ogLocale = (lang) => OG_LOCALES[lang] || lang.replace('-', '_')
+
 // Single source of head tags for every page. index.html deliberately declares
 // none of these — two copies of <title> is what we shipped before, and crawlers
 // disagree about which one wins.
@@ -35,7 +41,7 @@ export default function Seo({
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Splade Studio" />
-      <meta property="og:locale" content={lang === 'id' ? 'id_ID' : 'en_US'} />
+      <meta property="og:locale" content={ogLocale(lang)} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={social.title} />
       <meta property="og:description" content={social.description} />

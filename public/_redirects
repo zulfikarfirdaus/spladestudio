@@ -3,4 +3,4 @@
 # and returns a real 404 instead of a 200 that renders the homepage.
 
 # Canonical host — www serves the same site, so send it to the apex.
-https://www.spladestudio.com/* https://spladestudio.com/:splat 301!
+https://www.spladestudio.com/* https://spladestudio.com/:splat 301
