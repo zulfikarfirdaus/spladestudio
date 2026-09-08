@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import gsap from 'gsap'
+import Seo from '../components/Seo'
 import './Contact.css'
 
 // Secondary CTA — for prospects who'd rather talk it through than fill the form.
@@ -115,6 +116,11 @@ export default function Contact() {
 
   return (
     <div ref={pageRef}>
+      <Seo
+        title="Contact — Start a Project With Splade Studio"
+        description="Tell us about your project and we'll get back to you within 24 hours. Book a call, send an email, or fill in the brief."
+        path="/contact"
+      />
       <section className="contact-page">
         <div className="container contact-layout">
           {/* Left — copy */}

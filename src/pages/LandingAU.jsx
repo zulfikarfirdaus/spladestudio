@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Head } from 'vite-react-ssg'
+import Seo from '../components/Seo'
 import NavbarAU from '../components/au/NavbarAU'
 import FooterAU from '../components/au/FooterAU'
 import HeroAU from '../components/au/HeroAU'
@@ -20,17 +20,17 @@ export default function LandingAU() {
 
   return (
     <>
-      <Head>
-        <title>Splade Studio — Custom Websites for Australian Business</title>
-        <meta
-          name="description"
-          content="Custom websites designed and built from scratch for Australian businesses. Flat pricing from A$1,500, live in two weeks. No templates, no lock-in."
-        />
-        {/* Market landing page — keep out of search results so it never
-            competes with the main site for the same terms. */}
-        <meta name="robots" content="noindex, nofollow" />
-        <html lang="en-AU" />
-      </Head>
+      {/* Market landing page — noindex keeps it out of search so it never
+          competes with the main site for the same terms. */}
+      <Seo
+        title="Splade Studio — Custom Websites for Australian Business"
+        description="Custom websites designed and built from scratch for Australian businesses. Flat pricing from A$1,500, live in two weeks. No templates, no lock-in."
+        path="/au"
+        lang="en-AU"
+        noindex
+        ogTitle="Custom Websites for Australian Business — Splade Studio"
+        ogDescription="Designed and built from scratch. Flat pricing in AUD from A$1,500, live in two weeks. No templates, no lock-in."
+      />
       <NavbarAU />
       <main>
         <HeroAU />

@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projects } from '../data/portfolio'
+import Seo from '../components/Seo'
 import LogoStrip from '../components/sections/LogoStrip'
 import CTA from '../components/sections/CTA'
 import '../components/sections/WorkPreview.css'
@@ -45,6 +46,11 @@ export default function Work() {
 
   return (
     <div ref={pageRef}>
+      <Seo
+        title="Our Work — Custom Websites by Splade Studio"
+        description="Selected projects: e-commerce, multi-page business sites and landing pages, each designed and built from scratch around the brand."
+        path="/work"
+      />
       <section className="work-hero">
         <div className="container work-hero__content">
           <p className="label work-hero__eyebrow">Our projects</p>
@@ -70,6 +76,8 @@ export default function Work() {
                   <img
                     src={p.image}
                     alt={p.name}
+                    width="960"
+                    height="600"
                     loading="lazy"
                     decoding="async"
                     style={p.objectPosition ? { objectPosition: p.objectPosition } : undefined}

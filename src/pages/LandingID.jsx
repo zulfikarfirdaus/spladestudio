@@ -1,4 +1,4 @@
-import { Head } from 'vite-react-ssg'
+import Seo from '../components/Seo'
 import NavbarID from '../components/id/NavbarID'
 import FooterID from '../components/id/FooterID'
 import HeroID from '../components/id/HeroID'
@@ -16,16 +16,17 @@ import MetaPixel from '../components/id/MetaPixel'
 export default function LandingID() {
   return (
     <>
-      <Head>
-        <title>Splade Studio — Jasa Pembuatan Website Custom</title>
-        <meta
-          name="description"
-          content="Website custom untuk bisnis kamu. Didesain dengan taste, dibangun untuk kencang di Google. Mulai Rp 5jt, sekali bayar. Konsultasi gratis via WhatsApp."
-        />
-        {/* Ad landing page — keep out of search results so it never competes with the main site */}
-        <meta name="robots" content="noindex, nofollow" />
-        <html lang="id" />
-      </Head>
+      {/* Ad landing page — noindex keeps it out of search so it never
+          competes with the main site for the same terms. */}
+      <Seo
+        title="Splade Studio — Jasa Pembuatan Website Custom"
+        description="Website custom untuk bisnis kamu. Didesain dengan taste, dibangun untuk kencang di Google. Mulai Rp 5jt, sekali bayar. Konsultasi gratis via WhatsApp."
+        path="/id"
+        lang="id"
+        noindex
+        ogTitle="Bikin Website Custom untuk Bisnis Kamu — Splade Studio"
+        ogDescription="Bukan template. Didesain dari nol, kencang di Google, mulai Rp 5jt sekali bayar. Konsultasi gratis via WhatsApp."
+      />
       <MetaPixel />
       <NavbarID />
       <main>

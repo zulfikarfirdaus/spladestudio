@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Ad landing pages — also noindex'd in the page head.
+Disallow: /id
+Disallow: /au
+
+Sitemap: https://spladestudio.com/sitemap.xml

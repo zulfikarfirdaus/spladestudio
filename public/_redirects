@@ -1,1 +1,6 @@
-/* /index.html 200
+# Every route is prerendered to its own HTML file (vite-react-ssg), so there is
+# no SPA fallback here on purpose: an unmatched path falls through to 404.html
+# and returns a real 404 instead of a 200 that renders the homepage.
+
+# Canonical host — www serves the same site, so send it to the apex.
+https://www.spladestudio.com/* https://spladestudio.com/:splat 301!
