@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { Suspense, lazy, useRef, useSyncExternalStore } from "react"
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import './shaders-hero-section.css'
 
 // Both pull in @paper-design/shaders-react (WebGL) and/or framer-motion.
@@ -20,8 +21,16 @@ function getIsDesktopViewportServer() {
   return false
 }
 
+// @paper-design/shaders has no boolean play/pause prop — speed 0 is how you
+// freeze a shader. Anything else (`playing`, `backgroundColor`) is not a known
+// param, so the library spreads it onto the underlying <div> as an invalid DOM
+// attribute and the animation never actually stops.
+const MESH_SPEED = 0.12
+
 export function ShaderBackground({ children, playing = true }) {
   const containerRef = useRef(null)
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const speed = playing && !prefersReducedMotion ? MESH_SPEED : 0
 
   return (
     <div
@@ -60,9 +69,7 @@ export function ShaderBackground({ children, playing = true }) {
       <Suspense fallback={<div className="absolute inset-0 w-full h-full shader-mesh-fallback" />}>
         <ShaderMesh
           colors={["#000000", "#0a2e10", "#B9E600", "#041808", "#1a5020"]}
-          speed={0.12}
-          backgroundColor="#000000"
-          playing={playing}
+          speed={speed}
         />
       </Suspense>
 
@@ -73,6 +80,7 @@ export function ShaderBackground({ children, playing = true }) {
 
 export function PulsingCircle({ playing = true }) {
   const CONTAINER_SIZE = 140
+  const prefersReducedMotion = usePrefersReducedMotion()
   // shaders-hero-section.css hides .pulsing-circle below 768px — skip
   // fetching the shader/framer-motion chunk on mobile entirely.
   const showOnDesktop = useSyncExternalStore(
@@ -81,7 +89,9 @@ export function PulsingCircle({ playing = true }) {
     getIsDesktopViewportServer
   )
 
-  if (!showOnDesktop) return null
+  // Purely decorative: not worth the shader + framer-motion chunks for someone
+  // who has asked for reduced motion.
+  if (!showOnDesktop || prefersReducedMotion) return null
 
   return (
     <div className="pulsing-circle absolute bottom-8 right-8 z-30">
@@ -89,7 +99,7 @@ export function PulsingCircle({ playing = true }) {
         style={{ width: `${CONTAINER_SIZE}px`, height: `${CONTAINER_SIZE}px` }}
       >
         <Suspense fallback={null}>
-          <PulsingCircleVisual playing={playing} />
+          <PulsingCircleVisual speed={playing ? 1 : 0} />
         </Suspense>
       </div>
     </div>
@@ -110,22 +120,20 @@ export function HeroContent() {
           </span>
         </div>
 
-        <h1
-          className="text-7xl tracking-tight font-light text-white"
-          style={{ fontFamily: "'Inter', sans-serif", lineHeight: 1.05, marginBottom: '20px' }}
+        <p
+          className="hero-wordmark tracking-tight font-light text-white"
+          style={{ fontFamily: "'Inter', sans-serif" }}
         >
           <span
             className="font-semibold italic"
             style={{ fontFamily: "'Crete Round', serif" }}
           >Splade</span>{' '}Studio
-        </h1>
+        </p>
 
-        <p className="text-sm font-light text-white/70 leading-relaxed"
-          style={{ marginBottom: '32px' }}
-        >
+        <h1 className="hero-lede">
           We craft custom websites that help businesses stand out.<br className="hero-br" />
           {' '}Designed with taste, built to last — no templates, no shortcuts.
-        </p>
+        </h1>
 
         <div className="flex items-center flex-wrap" style={{ gap: '16px' }}>
           <Link to="/work" className="shader-btn shader-btn-outline">

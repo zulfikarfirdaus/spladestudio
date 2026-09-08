@@ -18,22 +18,20 @@ function HeroContentID() {
           </span>
         </div>
 
-        <h1
-          className="text-7xl tracking-tight font-light text-white"
-          style={{ fontFamily: "'Inter', sans-serif", lineHeight: 1.05, marginBottom: '20px' }}
+        <p
+          className="hero-wordmark tracking-tight font-light text-white"
+          style={{ fontFamily: "'Inter', sans-serif" }}
         >
           <span
             className="font-semibold italic"
             style={{ fontFamily: "'Crete Round', serif" }}
           >Splade</span>{' '}Studio
-        </h1>
+        </p>
 
-        <p className="text-sm font-light text-white/70 leading-relaxed"
-          style={{ marginBottom: '32px' }}
-        >
+        <h1 className="hero-lede">
           Website custom yang bikin bisnis kamu naik kelas.<br className="hero-br" />
           {' '}Didesain dengan taste, didevelop dengan kualitas. Bukan template yang gitu-gitu aja.
-        </p>
+        </h1>
 
         <div className="flex items-center flex-wrap" style={{ gap: '16px' }}>
           <a href="#work" className="shader-btn shader-btn-outline">

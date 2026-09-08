@@ -11,18 +11,18 @@ const CIRCUMFERENCE = +(2 * Math.PI * TEXT_RADIUS).toFixed(2)
 // Isolated in its own chunk so @paper-design/shaders-react + framer-motion
 // only load on devices that actually render this decoration (desktop —
 // shaders-hero-section.css hides it on mobile).
-export default function PulsingCircleVisual({ playing = true }) {
+export default function PulsingCircleVisual({ speed = 1 }) {
   return (
     <>
       <PulsingBorder
         colors={["#BEECFF", "#E77EDC", "#FF4C3E", "#00FF88", "#FFD700", "#FF6B35", "#8A2BE2"]}
         colorBack="#00000000"
-        speed={1}
+        speed={speed}
         roundness={1}
         thickness={0.1}
         softness={0.2}
         intensity={3}
-        spotsPerColor={3}
+        spots={3}
         spotSize={0.1}
         pulse={0.1}
         smoke={0.2}
@@ -30,7 +30,6 @@ export default function PulsingCircleVisual({ playing = true }) {
         scale={0.65}
         rotation={0}
         frame={9161408.251009725}
-        playing={playing}
         style={{ width: `${BORDER_SIZE}px`, height: `${BORDER_SIZE}px`, borderRadius: "50%" }}
       />
 

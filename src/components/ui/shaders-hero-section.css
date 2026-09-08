@@ -50,3 +50,22 @@
   outline: 2px solid rgba(255, 255, 255, 0.7);
   outline-offset: 3px;
 }
+
+/* The big wordmark. Tailwind's text-7xl is a fixed 72px, which overflows narrow
+   phones — this scales it down with the viewport instead. */
+.hero-wordmark {
+  font-size: clamp(2.75rem, 11vw, 4.5rem);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+/* The hero's <h1>. Visually the supporting line under the wordmark, but it
+   carries the page's actual subject, so it's the heading a crawler should read.
+   The wordmark above it is a <p>: it's the logo, not the headline. */
+.hero-lede {
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.625;
+  margin-bottom: 32px;
+  color: rgba(255, 255, 255, 0.7);
+}
