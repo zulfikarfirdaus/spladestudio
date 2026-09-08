@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import '../../pages/Contact.css'
@@ -45,11 +45,13 @@ export default function ContactAU({ service }) {
   useScrollReveal('.contact-hero__content, .contact-form', { stagger: 0.15, y: 30 })
 
   // Picking a pricing card fills the select — but never overwrites a choice
-  // the visitor has already made by hand.
-  useEffect(() => {
-    if (!service) return
-    setForm(f => (f.service ? f : { ...f, service }))
-  }, [service])
+  // the visitor has already made by hand. Adjusting during render (rather than
+  // in an effect) avoids the extra commit and the cascading re-render.
+  const [lastService, setLastService] = useState(service)
+  if (service !== lastService) {
+    setLastService(service)
+    if (service) setForm(f => (f.service ? f : { ...f, service }))
+  }
 
   function validateEmail(value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
@@ -159,7 +161,10 @@ export default function ContactAU({ service }) {
               <input
                 id="au-email"
                 name="email"
-                type="text"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
                 placeholder="you@company.com"
                 value={form.email}
                 onChange={handleChange}
