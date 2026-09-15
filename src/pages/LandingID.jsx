@@ -9,7 +9,6 @@ import WorkPreviewID from '../components/id/WorkPreviewID'
 import TestimonialsID from '../components/id/TestimonialsID'
 import PricingID from '../components/id/PricingID'
 import CTAID from '../components/id/CTAID'
-import MetaPixel from '../components/id/MetaPixel'
 
 // Dedicated landing page for Meta Ads (Indonesia).
 // Self-contained: own navbar/footer, no internal site links, WhatsApp-only CTA.
@@ -27,7 +26,6 @@ export default function LandingID() {
         ogTitle="Bikin Website Custom untuk Bisnis Kamu — Splade Studio"
         ogDescription="Bukan template. Didesain dari nol, kencang di Google, mulai Rp 5jt sekali bayar. Konsultasi gratis via WhatsApp."
       />
-      <MetaPixel />
       <NavbarID />
       <main>
         <HeroID />
