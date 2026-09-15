@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
-import { track } from '../../lib/pixel'
+import { track, MARKET_AU } from '../../lib/pixel'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import '../../pages/Contact.css'
 import './lp-au.css'
@@ -93,7 +93,7 @@ export default function ContactAU({ service }) {
         setForm(INITIAL)
         // Only on a confirmed 2xx — a Lead that fires on submit-attempt would
         // teach Meta to optimize for people who fail to send the form.
-        track('Lead')
+        track('Lead', { content_category: MARKET_AU })
       } else {
         setStatus('error')
       }

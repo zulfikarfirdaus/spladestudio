@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import gsap from 'gsap'
-import { track } from '../lib/pixel'
+import { track, MARKET_MAIN } from '../lib/pixel'
 import Seo from '../components/Seo'
 import './Contact.css'
 
@@ -109,7 +109,7 @@ export default function Contact() {
         setForm(INITIAL)
         // Only on a confirmed 2xx — a Lead that fires on submit-attempt would
         // teach Meta to optimize for people who fail to send the form.
-        track('Lead')
+        track('Lead', { content_category: MARKET_MAIN })
       } else {
         setStatus('error')
       }

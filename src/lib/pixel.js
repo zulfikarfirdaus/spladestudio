@@ -36,6 +36,15 @@ export function initPixel() {
   window.fbq('init', META_PIXEL_ID)
 }
 
+// One dataset serves three surfaces, so every conversion carries the market it
+// came from. Without this a Lead from /au and a Lead from /contact are
+// indistinguishable in Events Manager, and whoever is buying the media cannot
+// tell which market actually converted. content_category is a standard Meta
+// param, so it shows up in breakdowns without extra setup.
+export const MARKET_MAIN = 'Main site'
+export const MARKET_ID = 'ID landing'
+export const MARKET_AU = 'AU landing'
+
 // Standard events only — Meta optimizes delivery against these by name, so a
 // typo means a campaign silently optimizing against nothing.
 export function track(event, params) {

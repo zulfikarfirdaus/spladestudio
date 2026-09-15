@@ -1,4 +1,4 @@
-import { track } from './pixel'
+import { track, MARKET_ID } from './pixel'
 
 // WhatsApp CTA config for the Indonesian ad landing page (/id)
 export const WA_NUMBER = '6281217398515'
@@ -15,7 +15,7 @@ export const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_M
 // over-count relative to real conversations. Good enough as an optimization
 // signal, but it is not a lead count.
 export function trackWaContact() {
-  track('Contact')
+  track('Contact', { content_category: MARKET_ID })
 }
 
 // Per-package WhatsApp link. Prefilling the package name means the first
