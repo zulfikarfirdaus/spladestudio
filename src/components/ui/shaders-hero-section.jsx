@@ -108,7 +108,7 @@ export function PulsingCircle({ playing = true }) {
 
 export function HeroContent() {
   return (
-    <main className="absolute bottom-8 z-20" style={{ left: 'clamp(24px, 4%, 80px)', maxWidth: '620px' }}>
+    <main className="absolute bottom-8 z-20" style={{ left: 'clamp(24px, 4%, 80px)', maxWidth: '720px' }}>
       <div className="text-left">
         <div
           className="inline-flex items-center rounded-full bg-white/5 backdrop-blur-sm relative"
