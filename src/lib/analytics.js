@@ -8,6 +8,7 @@ import { initPixel, track as pixelTrack, pixelConsentUpdate } from './pixel'
 import { initGa, gaEvent, gaPageView, gaConsentUpdate } from './ga'
 import { saveConsent, resetConsent, GRANTED, DENIED } from './consent'
 import { leadValue } from './leadValue'
+import { newEventId, sendCapi } from './capi'
 
 // One pixel dataset and one GA property serve three surfaces, so every
 // conversion carries the market it came from. Without this a Lead from /au and
@@ -64,12 +65,28 @@ export function trackPageView(path) {
 //
 // `market` has to be registered once in GA4 Admin > Custom definitions before
 // it shows up in reports; Meta's content_category is standard and needs nothing.
-export function trackLead(market, service) {
+export function trackLead(market, service, user = {}) {
   // GA drops `value` unless `currency` rides with it, so they always travel
   // as a pair. See leadValue.js for why this is expected value, not price.
   const { value, currency } = leadValue(service)
-  pixelTrack('Lead', { content_category: market, content_name: service, value, currency })
+  const eventId = newEventId()
+
+  pixelTrack('Lead', { content_category: market, content_name: service, value, currency }, eventId)
   gaEvent('generate_lead', { market, service, value, currency })
+
+  // The same conversion again, server-side, sharing eventId so Meta merges
+  // the pair. `user` carries raw email and phone to our own origin only —
+  // the relay hashes both before anything reaches Meta.
+  sendCapi({
+    eventName: 'Lead',
+    eventId,
+    market,
+    service,
+    value,
+    currency,
+    email: user.email,
+    phone: user.phone,
+  })
 }
 
 // A submission the visitor completed but that never reached us — the monthly
@@ -88,6 +105,12 @@ export function trackContact(market, pkg) {
   // click-to-conversation-to-sale rate is unknown and far below a completed
   // form's, so pricing it would quietly inflate every ID number. The package
   // still rides along, which is what makes ID segmentable at all.
-  pixelTrack('Contact', { content_category: market, ...(pkg && { content_name: pkg }) })
+  const eventId = newEventId()
+  pixelTrack('Contact', { content_category: market, ...(pkg && { content_name: pkg }) }, eventId)
   gaEvent('contact', { market, ...(pkg && { package: pkg }) })
+
+  // No email or phone to send on this path — the visitor never typed any.
+  // The relay still contributes the click id, browser id, IP and user agent,
+  // which is exactly the coverage a blocked browser pixel loses.
+  sendCapi({ eventName: 'Contact', eventId, market, service: pkg })
 }

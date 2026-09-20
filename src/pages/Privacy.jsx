@@ -44,7 +44,9 @@ const CONTENT = {
         h: 'Analytics and advertising cookies',
         p: [
           'Nothing tracks you until you accept. Until then Google Analytics runs in a cookieless mode that sends no identifiers, and the Meta Pixel is held in a revoked state and sends nothing at all.',
-          'If you accept, we use Google Analytics 4 (cookies _ga and _ga_1WWG60NLN5) to measure how many people visit and which pages they use, and the Meta Pixel (cookie _fbp) to measure whether our ads work. We record three events: a page view, a form submission, and a click through to WhatsApp, each labelled with which of our pages it came from. We do not send your name, email, phone number, or message to either of them.',
+          'If you accept, we use Google Analytics 4 (cookies _ga and _ga_1WWG60NLN5) to measure how many people visit and which pages they use, and the Meta Pixel (cookie _fbp) to measure whether our ads work. We record three events: a page view, a form submission, and a click through to WhatsApp, each labelled with which of our pages it came from, and for a form submission an estimate of what an enquiry of that type is worth to us.',
+      'Google Analytics never receives your name, email, phone number or message.',
+      'Meta receives your email address and phone number as irreversible SHA-256 hashes — scrambled fingerprints it can compare against accounts it already has, so it can tell whether an ad led to your enquiry. It never receives them in readable form, and never receives your name or your message. Some of this is sent from our own server rather than your browser, which changes nothing about what is sent; it only means an ad blocker cannot silently drop it. None of it happens unless you accept.',
           'If you decline, both stay off and no such cookies are written.',
         ],
       },
@@ -124,7 +126,9 @@ const CONTENT = {
         h: 'Cookie analitik dan periklanan',
         p: [
           'Tidak ada pelacakan sebelum Anda menyetujuinya. Sebelum itu, Google Analytics berjalan dalam mode tanpa cookie yang tidak mengirim penanda apa pun, dan Meta Pixel ditahan dalam keadaan dicabut sehingga tidak mengirim apa-apa.',
-          'Jika Anda menyetujui, kami memakai Google Analytics 4 (cookie _ga dan _ga_1WWG60NLN5) untuk mengukur berapa banyak orang yang berkunjung dan halaman mana yang dibuka, serta Meta Pixel (cookie _fbp) untuk mengukur apakah iklan kami bekerja. Kami mencatat tiga peristiwa: kunjungan halaman, pengiriman formulir, dan klik menuju WhatsApp, masing-masing ditandai berasal dari halaman kami yang mana. Kami tidak mengirimkan nama, email, nomor telepon, atau isi pesan Anda ke keduanya.',
+          'Jika Anda menyetujui, kami memakai Google Analytics 4 (cookie _ga dan _ga_1WWG60NLN5) untuk mengukur berapa banyak orang yang berkunjung dan halaman mana yang dibuka, serta Meta Pixel (cookie _fbp) untuk mengukur apakah iklan kami bekerja. Kami mencatat tiga peristiwa: kunjungan halaman, pengiriman formulir, dan klik menuju WhatsApp, masing-masing ditandai berasal dari halaman kami yang mana, dan khusus pengiriman formulir disertai perkiraan nilai dari jenis permintaan tersebut bagi kami.',
+      'Google Analytics tidak pernah menerima nama, email, nomor telepon, maupun isi pesan Anda.',
+      'Meta menerima alamat email dan nomor telepon Anda dalam bentuk hash SHA-256 yang tidak dapat dikembalikan — sidik acak yang bisa dicocokkan dengan akun yang sudah mereka miliki, supaya mereka tahu apakah sebuah iklan menghasilkan permintaan Anda. Meta tidak pernah menerimanya dalam bentuk terbaca, dan tidak pernah menerima nama atau isi pesan Anda. Sebagian dikirim dari server kami, bukan dari peramban Anda; ini tidak mengubah apa yang dikirim, hanya membuatnya tidak bisa dihentikan diam-diam oleh pemblokir iklan. Semua ini tidak terjadi kecuali Anda menyetujuinya.',
           'Jika Anda menolak, keduanya tetap mati dan cookie tersebut tidak ditulis.',
         ],
       },

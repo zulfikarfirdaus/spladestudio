@@ -103,10 +103,22 @@ chat leaves the site so no utm can follow it. Expect it to over-count real
 conversations, and reconcile by hand against actual chats weekly. Closing this
 properly needs the WhatsApp Business API.
 
-**No Conversions API.** Browser-side pixel events lose roughly 15-30% to iOS
-ATT, ad blockers, and Safari ITP. A server-side CAPI endpoint (a Cloudflare
-Pages Function forwarding `Lead` with `event_id` dedup) recovers most of it.
-Worth building once spend is consistent — not before.
+**Conversions API needs its token.** The relay is built and deployed
+([`functions/api/meta-capi.js`](functions/api/meta-capi.js)) but inert until
+`META_CAPI_TOKEN` is set, at which point it returns `{"skipped"}` and does
+nothing. To turn it on:
+
+1. Events Manager > your dataset > Settings > Conversions API >
+   **Generate access token** (or a System User token with `ads_management`).
+2. Cloudflare dashboard > Pages > your project > Settings > Environment
+   variables > add **`META_CAPI_TOKEN`** as an encrypted secret, Production.
+3. Redeploy so the Function picks it up.
+4. Verify in Events Manager > Test Events: set `META_CAPI_TEST_CODE` to the
+   code shown there, submit a form, confirm the event arrives marked both
+   Browser and Server with one deduplicated count — then delete the test var.
+
+Browser and server events share an `event_id`, which is what makes Meta merge
+them instead of double-counting; the dedup window is 48 hours.
 
 **Formspree free tier caps at 50 submissions/month**, and both forms post to
 the same form ID. A campaign that works will hit that ceiling; check the plan

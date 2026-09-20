@@ -54,8 +54,12 @@ export function pixelConsentUpdate(granted) {
 
 // Raw transport. Event naming and market tagging live in analytics.js, which
 // is the only module that should be calling this directly.
-export function track(event, params) {
+export function track(event, params, eventId) {
   if (!isPixelEnabled() || typeof window.fbq !== 'function') return
-  if (params) window.fbq('track', event, params)
-  else window.fbq('track', event)
+  // The fourth argument is how the browser event announces its identity;
+  // the server copy sends the same string as event_id and Meta merges the
+  // two instead of counting one conversion twice.
+  const options = eventId ? { eventID: eventId } : undefined
+  if (params) window.fbq('track', event, params, options)
+  else window.fbq('track', event, {}, options)
 }
