@@ -211,11 +211,17 @@ export default function Contact() {
                   WhatsApp number
                   <span className="form-optional"> — optional</span>
                 </label>
+                {/* Placeholder is country-neutral on purpose: this form serves
+                    the main site, where the visitor could be anywhere. A sample
+                    +62 number was prompting Australians for the wrong format,
+                    and naming any one country just moves the problem. The /au
+                    landing page keeps a real +61 sample — there the audience is
+                    known. */}
                 <input
                   id="phone"
                   name="phone"
                   type="tel"
-                  placeholder="+62 812 3456 7890"
+                  placeholder="Include country code"
                   value={form.phone}
                   onChange={handleChange}
                 />
