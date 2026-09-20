@@ -15,8 +15,8 @@ const props = [
   },
   {
     icon: <Zap size={20} />,
-    title: 'Kencang & ketemu di Google',
-    desc: 'Dibangun untuk skor PageSpeed 90+ dengan struktur SEO yang rapi. Website cantik tapi lemot cuma bikin calon klien kabur.',
+    title: 'No lemot',
+    desc: 'Dibangun untuk skor PageSpeed 90+ dengan struktur SEO yang rapi. Websitenya cantik, speednya juga oke.',
   },
 ]
 

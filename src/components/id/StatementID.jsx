@@ -7,7 +7,7 @@ const BlurText = lazy(() => import('../ui/BlurText'))
 
 const logos = [...clients, ...clients]
 
-const QUOTE = "Desain yang bagus bukan sekadar dekorasi, desain menghadirkan nyawa. Setiap pixel, setiap baris kode, setiap interaksi dibuat sepenuh hati. Kami tidak menjual template. Kami membangun trust."
+const QUOTE = "Website yang baik bukan sekadar dekorasi, website yang menghadirkan nyawa. Setiap pixel, kode, dan interaksi dibuat dengan makna. Website yang membangun trust, bukan template semata."
 
 export default function StatementID() {
   useScrollReveal('.manifesto__split', { y: 40, duration: 0.9, start: 'top 80%' })
@@ -22,7 +22,13 @@ export default function StatementID() {
           <Suspense fallback={<p className="manifesto__quote">{QUOTE}</p>}>
             <BlurText
               text={QUOTE}
-              renderSegment={(word) => (word.startsWith('trust') ? <em>{word}</em> : word)}
+              // BlurText splits on spaces, so the segment here is "trust," —
+              // comma attached. Italicising the whole thing slants the comma
+              // too, which reads as a mistake, so only the word is wrapped.
+              renderSegment={(word) => {
+                const match = word.match(/^(trust)(\W*)$/)
+                return match ? <><em>{match[1]}</em>{match[2]}</> : word
+              }}
               className="manifesto__quote"
               animateBy="words"
               direction="bottom"
