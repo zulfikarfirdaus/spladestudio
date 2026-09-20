@@ -33,12 +33,9 @@ export function setConsent(granted) {
   // Meta drops rather than queues it, whoever accepts is never counted as
   // having arrived at all.
   //
-  // Whether Meta replays its own held events on grant could not be confirmed
-  // locally — the pixel does not emit beacons from localhost, so this is the
-  // one behaviour here that production has to settle (Events Manager > Test
-  // Events). The bet is deliberate: a duplicated PageView costs almost nothing
-  // (delivery optimizes on Lead and Contact, not PageView), while a dropped
-  // one loses the visit outright.
+  // Confirmed against production: Meta does not replay the event it held, so
+  // without this line an accepting visitor is never counted as having arrived.
+  // With it, exactly one PageView is sent on accept and none on decline.
   //
   // Meta only. GA already sent this page_view as a cookieless Consent Mode
   // ping, so re-firing it there would double-count the visit.
