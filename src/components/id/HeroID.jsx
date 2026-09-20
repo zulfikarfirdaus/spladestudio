@@ -30,7 +30,7 @@ function HeroContentID() {
 
         <h1 className="hero-lede">
           Website custom yang bikin bisnis kamu naik kelas.<br className="hero-br" />
-          {' '}Didesain dengan taste, didevelop dengan kualitas. Bukan template yang gitu-gitu aja.
+          {' '}Didesain dengan taste, didevelop dengan kualitas. Bukan template alakadarnya.
         </h1>
 
         <div className="flex items-center flex-wrap" style={{ gap: '16px' }}>
@@ -46,7 +46,7 @@ function HeroContentID() {
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
             <WaIcon size={16} />
-            Chat via WhatsApp
+            Chat
           </a>
         </div>
       </div>
