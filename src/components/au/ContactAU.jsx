@@ -34,6 +34,8 @@ const INITIAL = {
   phone: '',
   service: '',
   message: '',
+  // Honeypot — must stay empty; see the input in the form below.
+  _gotcha: '',
 }
 
 // The contact page, folded into the landing page as its closing CTA.
@@ -150,9 +152,9 @@ export default function ContactAU({ service }) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="au-business">Business name *</label>
+              <label htmlFor="au-company">Business name *</label>
               <input
-                id="au-business"
+                id="au-company"
                 name="company"
                 type="text"
                 placeholder="Acme Corp"
@@ -182,12 +184,12 @@ export default function ContactAU({ service }) {
               {emailError && <span className="form-field-error">{emailError}</span>}
             </div>
             <div className="form-group">
-              <label htmlFor="au-whatsapp">
+              <label htmlFor="au-phone">
                 Phone number
                 <span className="form-optional"> — optional</span>
               </label>
               <input
-                id="au-whatsapp"
+                id="au-phone"
                 name="phone"
                 type="tel"
                 placeholder="+61 4XX XXX XXX"
@@ -214,9 +216,9 @@ export default function ContactAU({ service }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="au-description">Tell us about your project *</label>
+            <label htmlFor="au-message">Tell us about your project *</label>
             <textarea
-              id="au-description"
+              id="au-message"
               name="message"
               rows={5}
               placeholder="What's the goal of the website? Any references or inspirations?"
@@ -225,6 +227,22 @@ export default function ContactAU({ service }) {
               required
             />
           </div>
+
+          {/* Honeypot. Formspree discards any submission where _gotcha is
+              filled — a bot walking the DOM fills every input it finds, a
+              human never sees this one. Not type="hidden": bots skip those, so
+              it has to look fillable and be hidden in CSS. aria-hidden and
+              tabIndex keep it away from screen readers and keyboard users. */}
+          <input
+            type="text"
+            name="_gotcha"
+            className="form-gotcha"
+            value={form._gotcha}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
 
           <button type="submit" className="btn btn-primary contact-form__submit" disabled={status === 'sending' || status === 'success'}>
             {status === 'sending' ? 'Sending…' : 'Send message'} {status !== 'sending' && <ArrowRight size={16} />}

@@ -206,3 +206,14 @@
 }
 
 .contact-form__error-actions a:hover { border-color: #ff6b6b; }
+
+/* Honeypot: off-screen rather than display:none, because a bot that parses
+   styles will skip anything hidden outright but will happily fill this. */
+.form-gotcha {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

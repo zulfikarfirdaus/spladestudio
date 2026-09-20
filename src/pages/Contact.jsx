@@ -44,6 +44,8 @@ const INITIAL = {
   phone: '',
   service: '',
   message: '',
+  // Honeypot — must stay empty; see the input in the form below.
+  _gotcha: '',
 }
 
 export default function Contact() {
@@ -256,6 +258,23 @@ export default function Contact() {
                 required
               />
             </div>
+
+              {/* Honeypot. Formspree discards any submission where _gotcha
+                  is filled — a bot walking the DOM fills every input it finds,
+                  a human never sees this one. Not type="hidden": bots skip
+                  those, so it has to look fillable and be hidden in CSS.
+                  aria-hidden and tabIndex keep it away from screen readers and
+                  keyboard users, who would otherwise hit an unlabelled field. */}
+              <input
+                type="text"
+                name="_gotcha"
+                className="form-gotcha"
+                value={form._gotcha}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
 
             <button type="submit" className="btn btn-primary contact-form__submit" disabled={status === 'sending' || status === 'success'}>
               {status === 'sending' ? 'Sending…' : 'Send message'} {status !== 'sending' && <ArrowRight size={16} />}
