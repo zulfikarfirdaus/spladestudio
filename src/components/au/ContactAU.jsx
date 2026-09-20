@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import { trackLead, MARKET_AU } from '../../lib/analytics'
-import { readAttribution } from '../../lib/attribution'
+import { buildEnquiry } from '../../lib/enquiry'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import '../../pages/Contact.css'
 import './lp-au.css'
@@ -29,11 +29,11 @@ const services = [
 
 const INITIAL = {
   name: '',
-  business: '',
+  company: '',
   email: '',
-  whatsapp: '',
+  phone: '',
   service: '',
-  description: '',
+  message: '',
 }
 
 // The contact page, folded into the landing page as its closing CTA.
@@ -86,14 +86,9 @@ export default function ContactAU({ service }) {
       const res = await fetch('https://formspree.io/f/mlgzpyed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        // `source` separates AU landing-page enquiries from the main site's;
-        // the attribution fields name the ad that produced them. Spread last so
-        // a stored utm_* can never be shadowed by a form field.
-        body: JSON.stringify({
-          ...form,
-          source: 'AU landing page (/au)',
-          ...readAttribution(),
-        }),
+        body: JSON.stringify(
+          buildEnquiry(form, { source: 'AU landing page (/au)', market: MARKET_AU }),
+        ),
       })
       if (res.ok) {
         setStatus('success')
@@ -156,10 +151,10 @@ export default function ContactAU({ service }) {
               <label htmlFor="au-business">Business name *</label>
               <input
                 id="au-business"
-                name="business"
+                name="company"
                 type="text"
                 placeholder="Acme Corp"
-                value={form.business}
+                value={form.company}
                 onChange={handleChange}
                 required
               />
@@ -191,10 +186,10 @@ export default function ContactAU({ service }) {
               </label>
               <input
                 id="au-whatsapp"
-                name="whatsapp"
+                name="phone"
                 type="tel"
                 placeholder="+61 4XX XXX XXX"
-                value={form.whatsapp}
+                value={form.phone}
                 onChange={handleChange}
               />
             </div>
@@ -220,10 +215,10 @@ export default function ContactAU({ service }) {
             <label htmlFor="au-description">Tell us about your project *</label>
             <textarea
               id="au-description"
-              name="description"
+              name="message"
               rows={5}
               placeholder="What's the goal of the website? Any references or inspirations?"
-              value={form.description}
+              value={form.message}
               onChange={handleChange}
               required
             />

@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import gsap from 'gsap'
 import { trackLead, MARKET_MAIN } from '../lib/analytics'
-import { readAttribution } from '../lib/attribution'
+import { buildEnquiry } from '../lib/enquiry'
 import Seo from '../components/Seo'
 import './Contact.css'
 
@@ -38,11 +38,11 @@ const services = [
 
 const INITIAL = {
   name: '',
-  business: '',
+  company: '',
   email: '',
-  whatsapp: '',
+  phone: '',
   service: '',
-  description: '',
+  message: '',
 }
 
 export default function Contact() {
@@ -103,13 +103,9 @@ export default function Contact() {
       const res = await fetch('https://formspree.io/f/mlgzpyed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        // `source` names the surface, the attribution fields name the ad.
-        // Spread last so a stored utm_* can never be shadowed by a form field.
-        body: JSON.stringify({
-          ...form,
-          source: 'Main site (/contact)',
-          ...readAttribution(),
-        }),
+        body: JSON.stringify(
+          buildEnquiry(form, { source: 'Main site (/contact)', market: MARKET_MAIN }),
+        ),
       })
       if (res.ok) {
         setStatus('success')
@@ -179,13 +175,13 @@ export default function Contact() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="business">Business name *</label>
+                <label htmlFor="company">Business name *</label>
                 <input
-                  id="business"
-                  name="business"
+                  id="company"
+                  name="company"
                   type="text"
                   placeholder="Acme Corp"
-                  value={form.business}
+                  value={form.company}
                   onChange={handleChange}
                   required
                 />
@@ -208,16 +204,16 @@ export default function Contact() {
                 {emailError && <span className="form-field-error">{emailError}</span>}
               </div>
               <div className="form-group">
-                <label htmlFor="whatsapp">
+                <label htmlFor="phone">
                   WhatsApp number
                   <span className="form-optional"> — optional</span>
                 </label>
                 <input
-                  id="whatsapp"
-                  name="whatsapp"
+                  id="phone"
+                  name="phone"
                   type="tel"
                   placeholder="+62 812 3456 7890"
-                  value={form.whatsapp}
+                  value={form.phone}
                   onChange={handleChange}
                 />
               </div>
@@ -240,13 +236,13 @@ export default function Contact() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Tell me about your project *</label>
+              <label htmlFor="message">Tell me about your project *</label>
               <textarea
-                id="description"
-                name="description"
+                id="message"
+                name="message"
                 rows={5}
                 placeholder="What's the goal of the website? Any references or inspirations?"
-                value={form.description}
+                value={form.message}
                 onChange={handleChange}
                 required
               />
