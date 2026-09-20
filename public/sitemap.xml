@@ -13,4 +13,12 @@
     <loc>https://spladestudio.com/contact</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://spladestudio.com/privacy</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://spladestudio.com/kebijakan-privasi</loc>
+    <priority>0.3</priority>
+  </url>
 </urlset>

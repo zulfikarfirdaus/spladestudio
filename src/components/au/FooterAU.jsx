@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../Footer.css'
 
 // Minimal footer for the AU landing page — contact channels only, no site nav.
@@ -26,6 +27,7 @@ export default function FooterAU() {
           <nav className="footer__nav">
             <a href="#contact">Get in touch</a>
             <a href="mailto:spladestudio@gmail.com">Email</a>
+            <Link to="/privacy">Privacy</Link>
             <a href="https://www.instagram.com/spladestudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </nav>
         </div>

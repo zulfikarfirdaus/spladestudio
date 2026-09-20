@@ -9,7 +9,7 @@
 // Left blank every export below no-ops and no script loads — same switch the
 // Meta Pixel uses, so tracking can be killed per-vendor without touching a
 // single call site.
-export const GA_MEASUREMENT_ID = ''
+export const GA_MEASUREMENT_ID = 'G-1WWG60NLN5'
 
 import { hasConsent } from './consent'
 

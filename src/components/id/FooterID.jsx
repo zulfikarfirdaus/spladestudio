@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { waHref, trackWaContact } from '../../lib/wa'
 import '../Footer.css'
 
@@ -27,6 +28,7 @@ export default function FooterID() {
           <nav className="footer__nav">
             <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={trackWaContact}>WhatsApp</a>
             <a href="mailto:spladestudio@gmail.com">Email</a>
+            <Link to="/kebijakan-privasi">Kebijakan Privasi</Link>
             <a href="https://www.instagram.com/spladestudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </nav>
         </div>

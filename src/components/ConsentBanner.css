@@ -100,3 +100,18 @@
 @media (prefers-reduced-motion: reduce) {
   .consent { animation: none; }
 }
+
+.consent__link {
+  color: var(--lime);
+  border-bottom: 1px solid rgba(185, 230, 0, 0.4);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: border-color var(--transition);
+}
+
+.consent__link:hover { border-color: var(--lime); }
+
+.consent__link:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}

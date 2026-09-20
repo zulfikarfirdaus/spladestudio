@@ -1,0 +1,98 @@
+/* Legal prose. Deliberately plain: this page exists to be read and understood,
+   so it gets measure and hierarchy and nothing else. */
+.legal {
+  background: var(--white);
+  color: var(--navy);
+  padding: 160px 0 var(--section-pad);
+}
+
+.legal__inner {
+  width: 100%;
+  /* ~70 characters per line — past that the eye loses the next line's start. */
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 6%, 40px);
+}
+
+.legal__header { margin-bottom: 40px; }
+
+.legal__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.legal__meta {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.legal__alt {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.875rem;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.25);
+  padding-bottom: 1px;
+  transition: border-color var(--transition);
+}
+
+.legal__alt:hover { border-color: var(--navy); }
+
+.legal__lede {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.1);
+}
+
+.legal__section { margin-top: 40px; }
+
+.legal__h2 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.legal__p {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: #3a3a3a;
+}
+
+.legal__p + .legal__p { margin-top: 12px; }
+
+/* The withdrawal control is the one actionable thing on the page, so it is
+   the one thing given a boundary. */
+.legal__reset {
+  margin-top: 56px;
+  padding: 28px;
+  border: 1px solid rgba(20, 20, 20, 0.12);
+  border-radius: var(--radius);
+}
+
+.legal__btn {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  background: var(--navy);
+  color: var(--white);
+  transition: opacity var(--transition);
+}
+
+.legal__btn:hover { opacity: 0.85; }
+
+.legal__btn:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}

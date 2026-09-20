@@ -59,6 +59,11 @@
   margin-bottom: 20px;
 }
 
+/* The hero content box is pinned left AND right with the same clamp. Without
+   the right pin it is only constrained by max-width, which on a phone exceeds
+   the viewport — so the lede ran flush to the right edge while keeping its
+   left gutter. On desktop max-width still wins and nothing moves. */
+
 /* The hero's <h1>. Visually the supporting line under the wordmark, but it
    carries the page's actual subject, so it's the heading a crawler should read.
    The wordmark above it is a <p>: it's the logo, not the headline. */

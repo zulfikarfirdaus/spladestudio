@@ -47,6 +47,19 @@ export function saveConsent(value) {
   for (const listener of listeners) listener()
 }
 
+// Withdrawing has to be as easy as giving — under the GDPR a policy that
+// takes consent and offers no way back does not hold. Clearing the choice
+// brings the banner back, and the vendors are told to stop in the same call.
+export function resetConsent() {
+  sessionChoice = null
+  try {
+    window.localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // Nothing stored to clear; sessionChoice above already did the work.
+  }
+  for (const listener of listeners) listener()
+}
+
 // Undecided counts as denied. Consent must be affirmative — treating silence
 // as a yes is exactly what the rules exist to prevent.
 export function hasConsent() {

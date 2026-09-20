@@ -6,7 +6,7 @@
 // quietly drift apart until the two dashboards disagree and neither is trusted.
 import { initPixel, track as pixelTrack, pixelConsentUpdate } from './pixel'
 import { initGa, gaEvent, gaPageView, gaConsentUpdate } from './ga'
-import { saveConsent, GRANTED, DENIED } from './consent'
+import { saveConsent, resetConsent, GRANTED, DENIED } from './consent'
 
 // One pixel dataset and one GA property serve three surfaces, so every
 // conversion carries the market it came from. Without this a Lead from /au and
@@ -27,6 +27,31 @@ export function setConsent(granted) {
   saveConsent(granted ? GRANTED : DENIED)
   gaConsentUpdate(granted)
   pixelConsentUpdate(granted)
+
+  // Replay the Meta PageView that was fired while consent was revoked. On a
+  // single-page ad landing there is no later navigation to cover for it, so if
+  // Meta drops rather than queues it, whoever accepts is never counted as
+  // having arrived at all.
+  //
+  // Whether Meta replays its own held events on grant could not be confirmed
+  // locally — the pixel does not emit beacons from localhost, so this is the
+  // one behaviour here that production has to settle (Events Manager > Test
+  // Events). The bet is deliberate: a duplicated PageView costs almost nothing
+  // (delivery optimizes on Lead and Contact, not PageView), while a dropped
+  // one loses the visit outright.
+  //
+  // Meta only. GA already sent this page_view as a cookieless Consent Mode
+  // ping, so re-firing it there would double-count the visit.
+  if (granted) pixelTrack('PageView')
+}
+
+// Revoke at both vendors, then forget the choice so the banner asks again.
+// Order matters: clearing first would leave the tags running until the next
+// page load, which is the window a withdrawal is supposed to close.
+export function clearConsent() {
+  gaConsentUpdate(false)
+  pixelConsentUpdate(false)
+  resetConsent()
 }
 
 export function trackPageView(path) {

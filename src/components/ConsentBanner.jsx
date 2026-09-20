@@ -1,5 +1,5 @@
 import { useEffect, useRef, useSyncExternalStore } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import {
   subscribeConsent,
   getConsentSnapshot,
@@ -15,12 +15,16 @@ const COPY = {
   en: {
     label: 'Cookie consent',
     text: 'We use cookies to measure how our ads perform. Nothing else, and nothing sold.',
+    more: 'Privacy policy',
+    href: '/privacy',
     accept: 'Accept',
     decline: 'Decline',
   },
   id: {
     label: 'Persetujuan cookie',
     text: 'Kami memakai cookie untuk mengukur performa iklan. Tidak lebih, dan tidak dijual.',
+    more: 'Kebijakan privasi',
+    href: '/kebijakan-privasi',
     accept: 'Terima',
     decline: 'Tolak',
   },
@@ -78,7 +82,13 @@ export default function ConsentBanner() {
   return (
     <section className="consent" ref={barRef} role="region" aria-label={t.label}>
       <div className="consent__inner">
-        <p className="consent__text">{t.text}</p>
+        <p className="consent__text">
+          {t.text}{' '}
+          {/* Consent is only informed if what is being consented to is one
+              click away — and the link has to survive the banner, so it
+              points at the page rather than expanding in place. */}
+          <Link className="consent__link" to={t.href}>{t.more}</Link>
+        </p>
         <div className="consent__actions">
           {/* Equal weight on both buttons on purpose: a decline styled as an
               afterthought is a dark pattern, and under the GDPR it invalidates

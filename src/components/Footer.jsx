@@ -22,6 +22,7 @@ export default function Footer() {
 
           <nav className="footer__nav">
             <Link to="/work">Projects</Link>
+            <Link to="/privacy">Privacy</Link>
             <a href="https://wa.me/6281217398515" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <a href="mailto:spladestudio@gmail.com">Email</a>
             <a href="https://www.instagram.com/spladestudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
