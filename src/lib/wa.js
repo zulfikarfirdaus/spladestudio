@@ -19,6 +19,14 @@ export function trackWaContact() {
   trackContact(MARKET_ID)
 }
 
+// Used by the pricing cards, which are the only CTAs that know which package
+// was clicked. Separate from trackWaContact rather than an optional argument:
+// the bare function is passed straight to onClick in five places, and an
+// optional first parameter would silently receive a MouseEvent there.
+export function trackWaContactFor(paket) {
+  trackContact(MARKET_ID, paket)
+}
+
 // Per-package WhatsApp link. Prefilling the package name means the first
 // message already carries the scope, so the chat starts past "berapa harganya?".
 export function waHrefFor(paket) {

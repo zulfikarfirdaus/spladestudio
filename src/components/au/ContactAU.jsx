@@ -97,7 +97,7 @@ export default function ContactAU({ service }) {
         setForm(INITIAL)
         // Only on a confirmed 2xx — a Lead that fires on submit-attempt would
         // teach Meta to optimize for people who fail to send the form.
-        trackLead(MARKET_AU)
+        trackLead(MARKET_AU, form.service)
       } else {
         setStatus('error')
         trackFormError(MARKET_AU)

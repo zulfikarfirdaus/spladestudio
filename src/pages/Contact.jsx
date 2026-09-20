@@ -115,7 +115,7 @@ export default function Contact() {
         setForm(INITIAL)
         // Only on a confirmed 2xx — a Lead that fires on submit-attempt would
         // teach Meta to optimize for people who fail to send the form.
-        trackLead(MARKET_MAIN)
+        trackLead(MARKET_MAIN, form.service)
       } else {
         setStatus('error')
         trackFormError(MARKET_MAIN)
