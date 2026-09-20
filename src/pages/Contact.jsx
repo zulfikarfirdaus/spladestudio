@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import gsap from 'gsap'
-import { track, MARKET_MAIN } from '../lib/pixel'
+import { trackLead, MARKET_MAIN } from '../lib/analytics'
+import { readAttribution } from '../lib/attribution'
 import Seo from '../components/Seo'
 import './Contact.css'
 
@@ -102,14 +103,20 @@ export default function Contact() {
       const res = await fetch('https://formspree.io/f/mlgzpyed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        // `source` names the surface, the attribution fields name the ad.
+        // Spread last so a stored utm_* can never be shadowed by a form field.
+        body: JSON.stringify({
+          ...form,
+          source: 'Main site (/contact)',
+          ...readAttribution(),
+        }),
       })
       if (res.ok) {
         setStatus('success')
         setForm(INITIAL)
         // Only on a confirmed 2xx — a Lead that fires on submit-attempt would
         // teach Meta to optimize for people who fail to send the form.
-        track('Lead', { content_category: MARKET_MAIN })
+        trackLead(MARKET_MAIN)
       } else {
         setStatus('error')
       }

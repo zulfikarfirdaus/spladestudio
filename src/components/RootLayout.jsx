@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom'
-import MetaPixel from './MetaPixel'
+import Analytics from './Analytics'
 
-// Pathless layout wrapping every route. Exists purely to give the Meta Pixel a
+// Pathless layout wrapping every route. Exists purely to give analytics a
 // single mount point — /id and /au sit outside PublicLayout, so without this
-// the pixel would need duplicating in three places.
+// the tracking would need duplicating in three places.
 export default function RootLayout() {
   return (
     <>
-      <MetaPixel />
+      <Analytics />
       <Outlet />
     </>
   )

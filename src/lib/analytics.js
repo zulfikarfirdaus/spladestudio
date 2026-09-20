@@ -1,0 +1,46 @@
+// One place every conversion goes, fanning out to each vendor.
+//
+// Call sites ask for a business event ("a lead came in, from AU") and this
+// module decides what that means per vendor. The alternative — every component
+// importing both transports and firing two calls — is how the pixel and GA
+// quietly drift apart until the two dashboards disagree and neither is trusted.
+import { initPixel, track as pixelTrack } from './pixel'
+import { initGa, gaEvent, gaPageView } from './ga'
+
+// One pixel dataset and one GA property serve three surfaces, so every
+// conversion carries the market it came from. Without this a Lead from /au and
+// a Lead from /contact are indistinguishable, and whoever is buying the media
+// cannot tell which market actually converted.
+export const MARKET_MAIN = 'Main site'
+export const MARKET_ID = 'ID landing'
+export const MARKET_AU = 'AU landing'
+
+export function initAnalytics() {
+  initPixel()
+  initGa()
+}
+
+export function trackPageView(path) {
+  pixelTrack('PageView')
+  gaPageView(path)
+}
+
+// Meta: standard events only — it optimizes delivery against these by name, so
+// a typo means a campaign silently optimizing against nothing.
+// GA4: `generate_lead` is the recommended lead-gen event, which is what makes
+// it available as a key event without custom setup.
+//
+// `market` has to be registered once in GA4 Admin > Custom definitions before
+// it shows up in reports; Meta's content_category is standard and needs nothing.
+export function trackLead(market) {
+  pixelTrack('Lead', { content_category: market })
+  gaEvent('generate_lead', { market })
+}
+
+// Fired on a WhatsApp click, not on a message actually being sent, so it
+// over-counts against real conversations. Good enough as a delivery signal for
+// click-to-WhatsApp campaigns; it is not a lead count.
+export function trackContact(market) {
+  pixelTrack('Contact', { content_category: market })
+  gaEvent('contact', { market })
+}

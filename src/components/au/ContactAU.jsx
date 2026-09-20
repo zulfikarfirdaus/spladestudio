@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
-import { track, MARKET_AU } from '../../lib/pixel'
+import { trackLead, MARKET_AU } from '../../lib/analytics'
+import { readAttribution } from '../../lib/attribution'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import '../../pages/Contact.css'
 import './lp-au.css'
@@ -85,15 +86,21 @@ export default function ContactAU({ service }) {
       const res = await fetch('https://formspree.io/f/mlgzpyed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        // `source` separates AU landing-page enquiries from the main site's.
-        body: JSON.stringify({ ...form, source: 'AU landing page (/au)' }),
+        // `source` separates AU landing-page enquiries from the main site's;
+        // the attribution fields name the ad that produced them. Spread last so
+        // a stored utm_* can never be shadowed by a form field.
+        body: JSON.stringify({
+          ...form,
+          source: 'AU landing page (/au)',
+          ...readAttribution(),
+        }),
       })
       if (res.ok) {
         setStatus('success')
         setForm(INITIAL)
         // Only on a confirmed 2xx — a Lead that fires on submit-attempt would
         // teach Meta to optimize for people who fail to send the form.
-        track('Lead', { content_category: MARKET_AU })
+        trackLead(MARKET_AU)
       } else {
         setStatus('error')
       }

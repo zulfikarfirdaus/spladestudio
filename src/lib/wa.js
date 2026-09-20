@@ -1,4 +1,4 @@
-import { track, MARKET_ID } from './pixel'
+import { trackContact, MARKET_ID } from './analytics'
 
 // WhatsApp CTA config for the Indonesian ad landing page (/id)
 export const WA_NUMBER = '6281217398515'
@@ -8,14 +8,15 @@ export const WA_MESSAGE =
 
 export const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
 
-// Fire the Meta Pixel "Contact" event on WhatsApp clicks.
-// Meta optimizes click-to-WA campaign delivery against this event.
+// Fire the "Contact" conversion on WhatsApp clicks. Meta optimizes
+// click-to-WA campaign delivery against this event.
 //
-// Note this fires on *click*, not on a message actually being sent — it will
-// over-count relative to real conversations. Good enough as an optimization
-// signal, but it is not a lead count.
+// This is the one conversion with no attribution attached: the chat leaves the
+// site, so unlike the forms there is no payload to carry utm params into. What
+// produced an ID lead has to be read off Meta's own reporting — see the
+// WhatsApp note in MARKETING.md.
 export function trackWaContact() {
-  track('Contact', { content_category: MARKET_ID })
+  trackContact(MARKET_ID)
 }
 
 // Per-package WhatsApp link. Prefilling the package name means the first
