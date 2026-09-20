@@ -1,0 +1,102 @@
+/* Bottom bar, not a modal. This sits on paid landing pages where the CTA is
+   the whole point — a dialog that blocks the page to ask about cookies buys
+   a consent rate at the cost of the conversion it was measuring. */
+.consent {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Above the fixed navbar (z-index 100), below nothing else on the site. */
+  z-index: 200;
+  background: var(--navy);
+  border-top: 1px solid var(--border-light);
+  /* Keeps the bar clear of the iOS home indicator. */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  animation: consent-in 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes consent-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.consent__inner {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 16px clamp(24px, 4%, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.consent__text {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--white);
+  /* The copy yields before the buttons do — a wrapped sentence is readable,
+     a wrapped button pair is not. */
+  min-width: 0;
+}
+
+.consent__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Both buttons share every dimension. Only the fill differs. */
+.consent__btn {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 11px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  background: transparent;
+  color: var(--white);
+  transition: background var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+
+.consent__btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.consent__btn--accept {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--navy);
+}
+
+.consent__btn--accept:hover {
+  background: #a5cf00;
+  border-color: #a5cf00;
+}
+
+.consent__btn:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .consent__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px 24px;
+  }
+  /* Full width and equal share, so neither choice is the easier tap target. */
+  .consent__actions > .consent__btn {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent { animation: none; }
+}

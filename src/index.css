@@ -176,3 +176,24 @@ h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1.1; }
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--navy); }
 ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+
+/* ── Consent bar clearance ─────────────────────────────────── */
+/* The consent bar is fixed to the bottom, and every hero anchors its content
+   and CTAs to the bottom of a full-height section — so without this the bar
+   lands straight on top of the primary call to action on the very pages that
+   paid traffic arrives at. --consent-h is set by the banner while it is up and
+   removed the moment it is answered, so this collapses to a no-op.
+   A transform rather than a `bottom` override: no specificity fight with
+   Tailwind's bottom-8, and it animates cheaply on the way out. */
+.hero-anchor {
+  transform: translateY(calc(-1 * var(--consent-h, 0px)));
+  transition: transform var(--transition);
+}
+
+/* Normal-flow content — the footer, mainly — must not sit permanently trapped
+   under the bar at full scroll. */
+body { padding-bottom: var(--consent-h, 0px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-anchor { transition: none; }
+}

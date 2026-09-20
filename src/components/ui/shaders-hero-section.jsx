@@ -94,7 +94,7 @@ export function PulsingCircle({ playing = true }) {
   if (!showOnDesktop || prefersReducedMotion) return null
 
   return (
-    <div className="pulsing-circle absolute bottom-8 right-8 z-30">
+    <div className="pulsing-circle hero-anchor absolute bottom-8 right-8 z-30">
       <div className="relative flex items-center justify-center"
         style={{ width: `${CONTAINER_SIZE}px`, height: `${CONTAINER_SIZE}px` }}
       >
@@ -108,7 +108,7 @@ export function PulsingCircle({ playing = true }) {
 
 export function HeroContent() {
   return (
-    <main className="absolute bottom-8 z-20" style={{ left: 'clamp(24px, 4%, 80px)', maxWidth: '720px' }}>
+    <main className="hero-anchor absolute bottom-8 z-20" style={{ left: 'clamp(24px, 4%, 80px)', maxWidth: '720px' }}>
       <div className="text-left">
         <div
           className="inline-flex items-center rounded-full bg-white/5 backdrop-blur-sm relative"

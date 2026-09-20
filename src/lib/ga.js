@@ -11,6 +11,8 @@
 // single call site.
 export const GA_MEASUREMENT_ID = ''
 
+import { hasConsent } from './consent'
+
 export function isGaEnabled() {
   return typeof window !== 'undefined' && /^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID)
 }
@@ -28,6 +30,21 @@ export function initGa() {
   window.gtag = gtag
 
   gtag('js', new Date())
+
+  // Consent Mode v2, set before config so no cookie is ever written ahead of a
+  // decision. Denied is not the same as off: GA still sends cookieless pings
+  // and models the conversions behind them, which is why this is wired through
+  // Google's consent API instead of just withholding the script.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    // Holds tags briefly so a returning visitor's stored grant, applied on the
+    // next line, lands before the first hit rather than after it.
+    wait_for_update: 500,
+  })
+  if (hasConsent()) gaConsentUpdate(true)
 
   // send_page_view off, then fired by hand on every route. Left on, gtag counts
   // the first document load and nothing after it, because client-side routing
@@ -52,4 +69,18 @@ export function gaPageView(path) {
 export function gaEvent(name, params) {
   if (!isGaEnabled() || typeof window.gtag !== 'function') return
   window.gtag('event', name, params)
+}
+
+// Called on init for a stored grant, and again the moment the banner is
+// answered. Safe before gtag.js has finished loading: commands queue on
+// dataLayer and replay in order once it does.
+export function gaConsentUpdate(granted) {
+  if (!isGaEnabled() || typeof window.gtag !== 'function') return
+  const state = granted ? 'granted' : 'denied'
+  window.gtag('consent', 'update', {
+    ad_storage: state,
+    ad_user_data: state,
+    ad_personalization: state,
+    analytics_storage: state,
+  })
 }

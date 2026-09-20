@@ -4,8 +4,9 @@
 // module decides what that means per vendor. The alternative — every component
 // importing both transports and firing two calls — is how the pixel and GA
 // quietly drift apart until the two dashboards disagree and neither is trusted.
-import { initPixel, track as pixelTrack } from './pixel'
-import { initGa, gaEvent, gaPageView } from './ga'
+import { initPixel, track as pixelTrack, pixelConsentUpdate } from './pixel'
+import { initGa, gaEvent, gaPageView, gaConsentUpdate } from './ga'
+import { saveConsent, GRANTED, DENIED } from './consent'
 
 // One pixel dataset and one GA property serve three surfaces, so every
 // conversion carries the market it came from. Without this a Lead from /au and
@@ -18,6 +19,14 @@ export const MARKET_AU = 'AU landing'
 export function initAnalytics() {
   initPixel()
   initGa()
+}
+
+// The banner's only job: record the decision, then tell both vendors at once.
+// Returning the value keeps the caller from having to re-read storage.
+export function setConsent(granted) {
+  saveConsent(granted ? GRANTED : DENIED)
+  gaConsentUpdate(granted)
+  pixelConsentUpdate(granted)
 }
 
 export function trackPageView(path) {

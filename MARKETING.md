@@ -57,8 +57,11 @@ ad         hero_v2_static          case_study_carousel
 ## Setup still to do
 
 1. **GA4 Measurement ID** — paste into `GA_MEASUREMENT_ID` in
-   [`src/lib/ga.js`](src/lib/ga.js) (`G-XXXXXXXXXX`, from Admin > Data streams).
-   Blank means GA no-ops entirely; nothing else needs changing.
+   [`src/lib/ga.js`](src/lib/ga.js). Blank means GA no-ops entirely.
+   It is the `G-XXXXXXXXXX` on the stream itself (Admin > Data streams > the
+   web stream), *not* the numeric Property ID — GA4 shows both and only the
+   `G-` one drives gtag. Property ID for this account is `522969641`, which is
+   what the Data API and Looker Studio want later.
 2. **Register `market` as a custom dimension** — GA4 Admin > Custom definitions
    > Create, event-scoped, parameter name `market`. Without this the market
    tagging reaches GA but never appears in a report.
@@ -66,20 +69,31 @@ ad         hero_v2_static          case_study_carousel
    `contact` as key events. They must have fired at least once to appear.
 4. **Meta breakdown** — Ads Manager > Breakdown > By dynamic creative element,
    or read `content_category` in Events Manager to split markets.
-5. **Canonical host redirect** — www currently serves the whole site at 200
-   alongside the apex. Cloudflare dashboard > your domain > **Rules > Redirect
-   Rules > Create rule**:
-   - Name: `www to apex`
-   - If: Custom filter expression, `Hostname` `equals` `www.spladestudio.com`
-   - Then: **Dynamic** redirect, expression
-     `concat("https://spladestudio.com", http.request.uri.path)`,
-     status **301**, preserve query string **on**
-   This cannot live in `public/_redirects` — Pages matches that file's `from`
-   field on path only, so a rule naming a hostname never fires.
-6. **Search Console** — verified via DNS, sitemap submitted and reading.
+5. **Search Console** — verified via DNS, sitemap submitted and reading.
    It only ever covers 3 URLs: `/id` and `/au` are noindex and disallowed in
    [`robots.txt`](public/robots.txt), which is correct for ad landing pages —
    just don't expect organic data about the ad markets.
+
+## Consent
+
+Nothing tracks until the visitor accepts. GA4 runs Consent Mode v2 (defaults
+denied, so it still models conversions while denied) and the Meta Pixel is
+revoked before `fbq('init')`, which is the only ordering that stops it writing
+`_fbp` on arrival. The choice persists in localStorage and is re-applied to
+both vendors on the next visit.
+
+The bar is localised — Bahasa on `/id`, English everywhere else — and publishes
+its measured height as `--consent-h` so hero CTAs lift clear of it. That is
+load-bearing for the paid pages: unlifted, the bar sits directly on the
+WhatsApp CTA on an ID phone.
+
+Expect a measurable share of visitors to decline, which shows up as a gap
+between Meta's reported conversions and GA4's. That gap is the consent rate,
+not a tracking bug.
+
+Not done: a privacy policy page. Meta's advertising policies expect advertisers
+to have one, and its absence is a common ad-review rejection — worth adding
+before the campaign rather than after a rejection.
 
 ## Known gaps
 
