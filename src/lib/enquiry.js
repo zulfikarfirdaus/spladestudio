@@ -21,3 +21,33 @@ export function buildEnquiry(form, { source, market }) {
     ...readAttribution(),
   }
 }
+
+const INBOX = 'spladestudio@gmail.com'
+
+// Some mail clients truncate very long mailto URLs, and a silently cut-off
+// brief is worse than a short one that arrives whole.
+const MAX_BODY = 1500
+
+/**
+ * A mailto carrying everything the visitor already typed.
+ *
+ * Formspree rejects submissions once the monthly cap is hit — they are not
+ * queued, the lead is simply gone. Same for an outage or a flaky connection.
+ * Since the form is only cleared on success, the state is still intact at that
+ * point, so the recovery path can be one click instead of asking someone to
+ * retype their brief into their own mail client.
+ */
+export function enquiryMailto(form, market) {
+  const subject = `${market}: ${form.name} — ${form.service || 'Not specified'}`
+  const body = [
+    `Name: ${form.name}`,
+    `Business: ${form.company}`,
+    `Email: ${form.email}`,
+    `Phone: ${form.phone}`,
+    `Service: ${form.service || 'Not specified'}`,
+    '',
+    (form.message || '').slice(0, MAX_BODY),
+  ].join('\n')
+
+  return `mailto:${INBOX}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}

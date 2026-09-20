@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
-import { trackLead, MARKET_AU } from '../../lib/analytics'
-import { buildEnquiry } from '../../lib/enquiry'
+import { trackLead, trackFormError, MARKET_AU } from '../../lib/analytics'
+import { buildEnquiry, enquiryMailto } from '../../lib/enquiry'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import '../../pages/Contact.css'
 import './lp-au.css'
@@ -98,9 +98,11 @@ export default function ContactAU({ service }) {
         trackLead(MARKET_AU)
       } else {
         setStatus('error')
+        trackFormError(MARKET_AU)
       }
     } catch {
       setStatus('error')
+      trackFormError(MARKET_AU)
     }
   }
 
@@ -234,9 +236,13 @@ export default function ContactAU({ service }) {
             </p>
           )}
           {status === 'error' && (
-            <p className="contact-form__error">
-              Something went wrong. Please email us directly at spladestudio@gmail.com
-            </p>
+            <div className="contact-form__error">
+              <p>That didn&rsquo;t send &mdash; but nothing you wrote is lost.</p>
+              <div className="contact-form__error-actions">
+                <a href={enquiryMailto(form, MARKET_AU)}>Send it as an email</a>
+                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a call instead</a>
+              </div>
+            </div>
           )}
         </form>
       </div>

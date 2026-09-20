@@ -185,3 +185,24 @@
     width: 100%;
   }
 }
+
+/* The error state is a recovery path, not an apology: the backend rejects
+   submissions once its monthly cap is hit, and the visitor's brief is still
+   sitting in the form at that point. These links carry it out by hand. */
+.contact-form__error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-top: 10px;
+}
+
+.contact-form__error-actions a {
+  color: #ff6b6b;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 107, 107, 0.5);
+  padding-bottom: 1px;
+  transition: border-color var(--transition);
+}
+
+.contact-form__error-actions a:hover { border-color: #ff6b6b; }

@@ -68,6 +68,14 @@ export function trackLead(market) {
   gaEvent('generate_lead', { market })
 }
 
+// A submission the visitor completed but that never reached us — the monthly
+// cap on the form backend, or an outage. GA only: it is not a Meta standard
+// event, and optimizing delivery toward failures would be actively harmful.
+// Worth having because it is the one failure the inbox cannot show you.
+export function trackFormError(market) {
+  gaEvent('form_error', { market })
+}
+
 // Fired on a WhatsApp click, not on a message actually being sent, so it
 // over-counts against real conversations. Good enough as a delivery signal for
 // click-to-WhatsApp campaigns; it is not a lead count.

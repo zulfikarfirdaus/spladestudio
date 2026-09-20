@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, Mail, Calendar } from 'lucide-react'
 import gsap from 'gsap'
-import { trackLead, MARKET_MAIN } from '../lib/analytics'
-import { buildEnquiry } from '../lib/enquiry'
+import { trackLead, trackFormError, MARKET_MAIN } from '../lib/analytics'
+import { buildEnquiry, enquiryMailto } from '../lib/enquiry'
+import { waHref } from '../lib/wa'
 import Seo from '../components/Seo'
 import './Contact.css'
 
@@ -115,9 +116,11 @@ export default function Contact() {
         trackLead(MARKET_MAIN)
       } else {
         setStatus('error')
+        trackFormError(MARKET_MAIN)
       }
     } catch {
       setStatus('error')
+      trackFormError(MARKET_MAIN)
     }
   }
 
@@ -258,9 +261,13 @@ export default function Contact() {
               </p>
             )}
             {status === 'error' && (
-              <p className="contact-form__error">
-                Something went wrong. Please email us directly at spladestudio@gmail.com
-              </p>
+              <div className="contact-form__error">
+                <p>That didn&rsquo;t send &mdash; but nothing you wrote is lost.</p>
+                <div className="contact-form__error-actions">
+                  <a href={enquiryMailto(form, MARKET_MAIN)}>Send it as an email</a>
+                  <a href={waHref} target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+                </div>
+              </div>
             )}
           </form>
         </div>
