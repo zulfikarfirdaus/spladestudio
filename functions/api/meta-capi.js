@@ -8,7 +8,7 @@
 // the visitor's email and phone reach Meta only as SHA-256 digests, computed
 // here. That is the whole reason this is server-side rather than in the page.
 
-const PIXEL_ID = '1919881244916302'
+const PIXEL_ID = '2200164477221630'
 
 // Probed against the live Graph API: v26.0 is the newest it accepts, v27.0+
 // return "Unknown path components". Pinned rather than floating, because an
