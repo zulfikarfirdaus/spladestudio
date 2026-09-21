@@ -16,8 +16,8 @@ gsap.registerPlugin(ScrollTrigger)
 const descID = {
   'Motherlight Birth Center': 'Website yang hangat dan welcoming untuk klinik gentle birth di Karanganyar.',
   "d'BestO": 'Revamp website brand F&B dengan desain yang bold dan clean.',
-  'JuanUp 2026': 'Website yang modern dan energik untuk program JuanUp 2026.',
-  'Al-Khair Investment': 'Website terpercaya untuk platform pendanaan bisnis berbasis syariah.',
+  'JuanUp 2026': 'Website yang modern dan energik untuk event JuanUp 2026 di Filipina.',
+  'Azraai Azmi Portfolio': 'Website portfolio untuk Associate Creative Director di Malaysia.',
 }
 
 const featured = Object.keys(descID)

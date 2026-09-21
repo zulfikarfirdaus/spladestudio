@@ -16,7 +16,7 @@ const props = [
   {
     icon: <Zap size={20} />,
     title: 'Fast where it counts',
-    desc: 'Built for 90+ PageSpeed and clean technical SEO. A beautiful site that loads slowly loses the visitor anyway.',
+    desc: 'Built for 90+ PageSpeed and clean technical SEO. A slow site loses the visitor.',
   },
 ]
 

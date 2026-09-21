@@ -1,7 +1,7 @@
 export const projects = [
   {
     name: 'JuanUp 2026',
-    desc: 'Modern, energetic website for the JuanUp 2026 program.',
+    desc: 'Modern, energetic website for the JuanUp 2026 event in the Philippines.',
     tags: ['Landing Page', 'Web Development'],
     url: 'juanup.juan.ac',
     image: '/images/juanup.webp',
@@ -15,6 +15,13 @@ export const projects = [
     objectPosition: 'center',
   },
   {
+    name: 'Azraai Azmi Portfolio',
+    desc: 'Personal site for an Associate Creative Director based in Malaysia.',
+    tags: ['Landing Page', 'Web Development'],
+    url: 'www.azraaiazmi.com',
+    image: '/images/rae.webp',
+  },
+  {
     name: 'Ventop',
     desc: 'Clean B2B-focused website for a cap brand targeting wholesale and business buyers.',
     tags: ['Landing Page', 'Web Development'],
@@ -23,7 +30,7 @@ export const projects = [
   },
   {
     name: 'Motherlight Birth Center',
-    desc: 'Warm, welcoming website for a gentle birth clinic in Karanganyar.',
+    desc: 'Warm, welcoming website for a gentle birth clinic.',
     tags: ['Multi-page Website', 'Web Development'],
     url: 'motherlight.co.id',
     image: '/images/motherlight.webp',
