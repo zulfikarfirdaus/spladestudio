@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
 import Seo from '../components/Seo'
 import { clearConsent } from '../lib/analytics'
 import './Privacy.css'
@@ -17,6 +18,7 @@ const CONTENT = {
     path: '/privacy',
     lang: 'en',
     alt: { to: '/kebijakan-privasi', label: 'Baca dalam Bahasa Indonesia' },
+    back: { to: '/', label: 'Back' },
     title: 'Privacy Policy — Splade Studio',
     description:
       'What Splade Studio collects, why, who it is shared with, and how to withdraw consent or have your data deleted.',
@@ -99,6 +101,7 @@ const CONTENT = {
     path: '/kebijakan-privasi',
     lang: 'id',
     alt: { to: '/privacy', label: 'Read in English' },
+    back: { to: '/id', label: 'Kembali' },
     title: 'Kebijakan Privasi — Splade Studio',
     description:
       'Apa yang Splade Studio kumpulkan, untuk apa, dibagikan ke siapa, dan cara menarik persetujuan atau menghapus data Anda.',
@@ -180,6 +183,14 @@ const CONTENT = {
 
 export default function Privacy({ lang = 'en' }) {
   const t = CONTENT[lang]
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // The site logo goes to the main homepage, which is the wrong destination for
+  // someone who reached this page from /id or /au. Pop the history entry they
+  // actually came from; `key` is 'default' only when this page was the entry
+  // point, and then there is nothing to pop, so fall back to that market's home.
+  const canGoBack = location.key !== 'default'
 
   return (
     <>
@@ -187,6 +198,15 @@ export default function Privacy({ lang = 'en' }) {
       <article className="legal">
         <div className="legal__inner">
           <header className="legal__header">
+            {canGoBack ? (
+              <button type="button" className="legal__back" onClick={() => navigate(-1)}>
+                <ArrowLeft size={15} aria-hidden="true" /> {t.back.label}
+              </button>
+            ) : (
+              <Link className="legal__back" to={t.back.to}>
+                <ArrowLeft size={15} aria-hidden="true" /> {t.back.label}
+              </Link>
+            )}
             <h1 className="legal__title">{t.heading}</h1>
             <p className="legal__meta">{t.updated}</p>
             <Link className="legal__alt" to={t.alt.to}>{t.alt.label}</Link>

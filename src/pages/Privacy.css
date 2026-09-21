@@ -16,6 +16,22 @@
 
 .legal__header { margin-bottom: 40px; }
 
+/* Rendered as a <button> when there is history to pop, as an <a> when there
+   is not — the two have to look identical. */
+.legal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color var(--transition);
+}
+
+.legal__back:hover { color: var(--navy); }
+
 .legal__title {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3rem);
