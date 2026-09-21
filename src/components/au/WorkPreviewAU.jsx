@@ -120,7 +120,7 @@ export default function WorkPreviewAU() {
             aria-expanded={expanded}
             aria-controls="au-work-grid"
           >
-            {expanded ? 'See less' : `See all ${featured.length} projects`}
+            {expanded ? 'See less' : 'See more'}
             <ChevronDown size={15} aria-hidden="true" />
           </button>
           <a href="#contact" className="btn wp-see-all-btn">

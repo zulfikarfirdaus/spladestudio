@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 // LP-specific project selection (by name) with casual ID/EN descriptions.
 // Order here is the display order: Bahasa-language sites first, and the four
-// above the fold before the four behind "Lihat semua".
+// above the fold before the four behind the toggle.
 //
 // Every project shown here needs an entry — falling back to the English desc
 // on a Bahasa landing page is worse than not showing the project. Ventop and
@@ -136,7 +136,7 @@ export default function WorkPreviewID() {
             aria-expanded={expanded}
             aria-controls="id-work-grid"
           >
-            {expanded ? 'Tampilkan lebih sedikit' : `Lihat semua ${featured.length} project`}
+            {expanded ? 'Lihat lebih sedikit' : 'Lihat lebih banyak'}
             <ChevronDown size={15} aria-hidden="true" />
           </button>
           <a
