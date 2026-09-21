@@ -21,7 +21,7 @@ const packages = [
   {
     name: 'Website Bisnis',
     for: 'Untuk perusahaan yang butuh profil lengkap, halaman layanan, dan ditemukan di Google.',
-    price: 'Rp 10jt',
+    price: 'Rp 8jt',
     unit: 'sekali bayar',
     featured: true,
     features: [
