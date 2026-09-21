@@ -121,6 +121,35 @@
   margin-top: 56px;
 }
 
+/* Landing pages stack the expand toggle above the contact CTA. */
+.wp-footer--stack {
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Deliberately a text link, not a second button: on /au and /id the CTA
+   directly below it is the primary action and has to stay that way. */
+.wp-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--navy);
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(19, 25, 43, 0.25);
+  transition: opacity 0.25s, border-color 0.25s;
+}
+
+.wp-toggle:hover {
+  opacity: 0.6;
+  border-color: var(--navy);
+}
+
+.wp-toggle svg { transition: transform 0.3s ease; }
+.wp-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
+
 .wp-see-all-btn {
   border: 1.5px solid rgba(19, 25, 43, 0.2);
   color: var(--navy);
