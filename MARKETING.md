@@ -76,12 +76,18 @@ real attribution; the rest only cost you legibility in reports.
    what hits it. The forms do fail honestly: the visitor gets a mailto fallback
    carrying everything they typed. But a lead that has to be re-sent by hand is
    mostly a lead you don't get.
-3. **`market` is registered as a custom dimension** — GA4 Admin > Custom
-   definitions > Create, event-scoped, parameter name `market`. Every event
-   already carries it; without this it reaches GA and never surfaces anywhere.
-4. **`generate_lead` and `contact` are marked key events** — GA4 Admin >
-   Events. They must have fired at least once to appear, so send a test
-   enquiry first.
+3. ~~`market` registered as a custom dimension.~~ Done 20 Sep 2026 —
+   event-scoped, parameter `market`.
+4. **Star `contact` as a key event.** GA4 Admin > Data display > Events >
+   *Recent events*, then the star beside the name — this build of GA4 has no
+   "new key event" button, the star is the toggle. `generate_lead` is starred
+   already. `contact` has now fired and been seen in Realtime, but an event
+   takes up to 24h to reach the *Recent events* list, and only what is in that
+   list can be starred. Nothing to do but wait a day and star it.
+
+   An event has to have fired at least once to be starrable at all, which is
+   why this one lagged: `contact` is a WhatsApp tap on `/id`, and with no
+   traffic nobody had ever tapped one. Firing it by hand is enough.
 5. **The UTM template is pasted at ad level**, per the convention above. An ad
    without it still converts; you just can't tell which ad did it.
 
