@@ -16,6 +16,15 @@ const ogLocale = (lang) => OG_LOCALES[lang] || lang.replace('-', '_')
 // `path` drives both the canonical and og:url, so the two can never drift apart.
 // `noindex` is for the ad landing pages, which must not compete with the main
 // site in search; they still get full social tags because they're shared in ads.
+//
+// `alternates` is for a page that exists in more than one language — currently
+// the privacy notice, which lives at /privacy and /kebijakan-privasi. Without
+// it the two read as near-duplicates of each other and Google picks one to
+// keep, arbitrarily; with it they read as one page in two languages and each
+// is served to the audience that can read it. Pass the full set on every
+// translation, the page's own included: hreflang has to be reciprocal or it is
+// ignored, and listing self is what makes that true no matter which one is
+// being rendered.
 export default function Seo({
   title,
   description,
@@ -24,6 +33,7 @@ export default function Seo({
   noindex = false,
   ogTitle,
   ogDescription,
+  alternates = [],
 }) {
   const url = `${SITE}${path}`
   const social = {
@@ -38,6 +48,15 @@ export default function Seo({
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+      {alternates.map((alt) => (
+        <link key={alt.lang} rel="alternate" hrefLang={alt.lang} href={`${SITE}${alt.path}`} />
+      ))}
+      {/* Whoever is listed first is the fallback for a reader we have no
+          language match for. */}
+      {alternates.length > 0 && (
+        <link rel="alternate" hrefLang="x-default" href={`${SITE}${alternates[0].path}`} />
+      )}
 
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Splade Studio" />

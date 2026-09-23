@@ -1,8 +1,11 @@
 User-agent: *
 Allow: /
 
-# Ad landing pages — also noindex'd in the page head.
-Disallow: /id
-Disallow: /au
+# /id and /au are ad landing pages and must stay out of search. That is the
+# noindex in their <head>'s job, not a Disallow here — which is what used to
+# sit at this spot and quietly defeated it. A disallowed URL is never fetched,
+# so the noindex on it is never read; an ad link shared onward can then still
+# be indexed, URL-only and description-less. Letting the crawler in is exactly
+# what gets these two out.
 
 Sitemap: https://spladestudio.com/sitemap.xml

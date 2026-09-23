@@ -70,9 +70,12 @@ ad         hero_v2_static          case_study_carousel
 4. **Meta breakdown** — Ads Manager > Breakdown > By dynamic creative element,
    or read `content_category` in Events Manager to split markets.
 5. **Search Console** — verified via DNS, sitemap submitted and reading.
-   It only ever covers 3 URLs: `/id` and `/au` are noindex and disallowed in
-   [`robots.txt`](public/robots.txt), which is correct for ad landing pages —
-   just don't expect organic data about the ad markets.
+   It only ever covers the 5 sitemap URLs. `/id` and `/au` are held out of
+   search by the `noindex` in their head, and *only* that: they used to also be
+   disallowed in [`robots.txt`](public/robots.txt), which defeated it, because a
+   URL the crawler may not fetch is a URL whose `noindex` is never read — an ad
+   link shared onward could still be indexed bare. The Disallow is gone; don't
+   put it back, and don't expect organic data about the ad markets either way.
 
 ## Consent
 

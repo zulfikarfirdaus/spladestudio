@@ -181,6 +181,11 @@ const CONTENT = {
   },
 }
 
+// One page in two languages, not two pages that resemble each other. Derived
+// from CONTENT so a third translation is picked up by adding it there and
+// nowhere else; English leads, so it is also the x-default.
+const ALTERNATES = Object.values(CONTENT).map(({ lang, path }) => ({ lang, path }))
+
 export default function Privacy({ lang = 'en' }) {
   const t = CONTENT[lang]
   const navigate = useNavigate()
@@ -194,7 +199,13 @@ export default function Privacy({ lang = 'en' }) {
 
   return (
     <>
-      <Seo title={t.title} description={t.description} path={t.path} lang={t.lang} />
+      <Seo
+        title={t.title}
+        description={t.description}
+        path={t.path}
+        lang={t.lang}
+        alternates={ALTERNATES}
+      />
       <article className="legal">
         <div className="legal__inner">
           <header className="legal__header">
