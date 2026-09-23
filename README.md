@@ -1,16 +1,64 @@
-# React + Vite
+# Splade Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The studio's own site: marketing pages plus two paid-ads landing pages,
+prerendered to static HTML and served from Cloudflare Pages.
 
-Currently, two official plugins are available:
+## Running it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev      # vite dev server
+npm run build    # vite-react-ssg — prerenders every route to its own HTML
+npm run lint
+```
 
-## React Compiler
+`npm run dev` is enough for anything that lives inside React. It is *not*
+enough for the two things that don't:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build && npx wrangler pages dev dist
+```
 
-## Expanding the ESLint configuration
+That runs the real Pages runtime — Functions routing, `_headers`, `_redirects`,
+and the status codes actually served. Use it before touching anything in
+[`functions/`](functions/), and to check a 404 is a 404. Note it writes scratch
+files to `.wrangler/tmp` that trip eslint, and dirties tracked state under
+`.wrangler/state`; `rm -rf .wrangler/tmp && git checkout -- .wrangler/` after.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Deploying
+
+**Push to `main`.** Cloudflare Pages' Git integration builds and deploys it,
+usually within a minute. `dist/` is gitignored — Cloudflare runs the build, so
+there is nothing to upload and no `wrangler pages deploy` step. There is no CI.
+
+Server-side secrets (currently `META_CAPI_TOKEN`) live in the Cloudflare
+dashboard under Pages > Settings > Environment variables, not in the repo, and
+need a redeploy to be picked up.
+
+## Routes
+
+| Path | What it is |
+|---|---|
+| `/` `/work` `/contact` | The main site |
+| `/privacy` `/kebijakan-privasi` | One privacy policy, two languages, reciprocal `hreflang` |
+| `/id` `/au` | Paid landing pages, `noindex`, standalone layouts |
+| `/api/meta-capi` | Pages Function — Meta Conversions API relay |
+| `/404` | Pages Function, so the clean URL returns a real 404 rather than 200 |
+
+Routes are declared in [`src/routes.jsx`](src/routes.jsx) and prerendered from
+there. `/id` and `/au` are deliberately absent from
+[`sitemap.xml`](public/sitemap.xml); they are kept out of search by the
+`noindex` in their head and *only* that — see MARKETING.md before adding any
+`Disallow` to [`robots.txt`](public/robots.txt).
+
+## Where things are written down
+
+- [`PRODUCT.md`](PRODUCT.md) — who the site is for, brand personality, the
+  design principles a change should be arguable against.
+- [`MARKETING.md`](MARKETING.md) — how conversion tracking is wired, the UTM
+  convention paid traffic must follow, and the pre-launch checklist. Read
+  "Before you spend" before starting a campaign.
+
+Head tags are owned entirely by [`src/components/Seo.jsx`](src/components/Seo.jsx);
+`index.html` declares none on purpose, because two copies of `<title>` is what
+shipped once already.

@@ -54,28 +54,46 @@ ad set     jakarta_25_45_biz       sydney_smb_lookalike
 ad         hero_v2_static          case_study_carousel
 ```
 
-## Setup still to do
+## Before you spend
 
-1. **GA4 Measurement ID** — paste into `GA_MEASUREMENT_ID` in
-   [`src/lib/ga.js`](src/lib/ga.js). Blank means GA no-ops entirely.
-   It is the `G-XXXXXXXXXX` on the stream itself (Admin > Data streams > the
-   web stream), *not* the numeric Property ID — GA4 shows both and only the
-   `G-` one drives gtag. Property ID for this account is `522969641`, which is
-   what the Data API and Looker Studio want later.
-2. **Register `market` as a custom dimension** — GA4 Admin > Custom definitions
-   > Create, event-scoped, parameter name `market`. Without this the market
-   tagging reaches GA but never appears in a report.
-3. **Mark key events** — GA4 Admin > Events, toggle `generate_lead` and
-   `contact` as key events. They must have fired at least once to appear.
-4. **Meta breakdown** — Ads Manager > Breakdown > By dynamic creative element,
-   or read `content_category` in Events Manager to split markets.
-5. **Search Console** — verified via DNS, sitemap submitted and reading.
-   It only ever covers the 5 sitemap URLs. `/id` and `/au` are held out of
-   search by the `noindex` in their head, and *only* that: they used to also be
-   disallowed in [`robots.txt`](public/robots.txt), which defeated it, because a
-   URL the crawler may not fetch is a URL whose `noindex` is never read — an ad
-   link shared onward could still be indexed bare. The Disallow is gone; don't
-   put it back, and don't expect organic data about the ad markets either way.
+Ordered by what it costs you to get wrong. The first two lose real leads or
+real attribution; the rest only cost you legibility in reports.
+
+1. **`META_CAPI_TOKEN` is set in Cloudflare.** Until it is, the relay in
+   [`functions/api/meta-capi.js`](functions/api/meta-capi.js) answers
+   `{"skipped"}` and every conversion an ad blocker or Safari's ITP eats is
+   simply gone. Steps under Known gaps below. Highest-value item on this page,
+   and it is ten minutes of dashboard work against a relay that is already
+   built, deployed and consent-gated.
+2. **Formspree is off the free tier** — or you have consciously accepted losing
+   leads past 50 a month. Both forms post to the same form ID, so that cap is
+   shared across the main site and `/au`. A campaign that works is precisely
+   what hits it. The forms do fail honestly: the visitor gets a mailto fallback
+   carrying everything they typed. But a lead that has to be re-sent by hand is
+   mostly a lead you don't get.
+3. **`market` is registered as a custom dimension** — GA4 Admin > Custom
+   definitions > Create, event-scoped, parameter name `market`. Every event
+   already carries it; without this it reaches GA and never surfaces anywhere.
+4. **`generate_lead` and `contact` are marked key events** — GA4 Admin >
+   Events. They must have fired at least once to appear, so send a test
+   enquiry first.
+5. **The UTM template is pasted at ad level**, per the convention above. An ad
+   without it still converts; you just can't tell which ad did it.
+
+Already done — don't redo these: the GA4 Measurement ID is live in
+[`src/lib/ga.js`](src/lib/ga.js) (`G-1WWG60NLN5`; the numeric Property ID the
+Data API and Looker Studio want later is `522969641`), the privacy policy ships
+at `/privacy` and `/kebijakan-privasi`, and Search Console is verified by DNS
+with the sitemap reading.
+
+**Reading the markets apart.** Ads Manager > Breakdown > By dynamic creative
+element, or read `content_category` in Events Manager. Search Console only ever
+covers the 5 sitemap URLs: `/id` and `/au` are held out of search by the
+`noindex` in their head, and *only* that. They used to also be disallowed in
+[`robots.txt`](public/robots.txt), which defeated it — a URL the crawler may
+not fetch is a URL whose `noindex` is never read, so an ad link shared onward
+could still be indexed bare. The Disallow is gone; don't put it back, and don't
+expect organic data about the ad markets either way.
 
 ## Consent
 
@@ -94,9 +112,10 @@ Expect a measurable share of visitors to decline, which shows up as a gap
 between Meta's reported conversions and GA4's. That gap is the consent rate,
 not a tracking bug.
 
-Not done: a privacy policy page. Meta's advertising policies expect advertisers
-to have one, and its absence is a common ad-review rejection — worth adding
-before the campaign rather than after a rejection.
+The privacy policy Meta's advertising policies expect is live, in both markets
+— `/privacy` and `/kebijakan-privasi`, linked from every footer. Its absence is
+a common ad-review rejection, so this one is genuinely load-bearing for getting
+ads approved, not just for the PDP Law.
 
 ## Known gaps
 
@@ -108,8 +127,8 @@ properly needs the WhatsApp Business API.
 
 **Conversions API needs its token.** The relay is built and deployed
 ([`functions/api/meta-capi.js`](functions/api/meta-capi.js)) but inert until
-`META_CAPI_TOKEN` is set, at which point it returns `{"skipped"}` and does
-nothing. To turn it on:
+`META_CAPI_TOKEN` is set: without it every call returns `{"skipped"}` and
+nothing reaches Meta at all. To turn it on:
 
 1. Events Manager > your dataset > Settings > Conversions API >
    **Generate access token** (or a System User token with `ads_management`).
