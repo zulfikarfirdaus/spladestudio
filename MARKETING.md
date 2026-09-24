@@ -59,15 +59,11 @@ ad         hero_v2_static          case_study_carousel
 Ordered by what it costs you to get wrong. The first two lose real leads or
 real attribution; the rest only cost you legibility in reports.
 
-1. **Confirm the Conversions API is actually delivering.** The token *is*
-   configured in production — probe the relay with a junk payload and it
-   answers `400 eventName and eventId are required`, which it can only reach
-   past the token check; unconfigured, it answers `200 {"skipped"}` instead.
-   What that does not prove is that the token still *works*. A revoked or
-   expired token fails silently: the form still submits, the browser pixel
-   still fires, and only server-side coverage quietly disappears. So verify
-   delivery, not configuration — Events Manager > Test Events, per the steps
-   under Known gaps, and watch for `capi_error` in GA4 afterwards
+1. ~~Confirm the Conversions API is actually delivering.~~ Done 24 Sep 2026 —
+   Meta answered a server event with `{"events_received":1,"messages":[]}` and
+   marked it Processed in Test Events. The token is not merely configured, it
+   is accepted. Deduplication is a separate question and still open; see Known
+   gaps. Keep watching for `capi_error` in GA4 regardless
    ([`src/lib/capi.js`](src/lib/capi.js) reports failures there precisely
    because Meta cannot be trusted to report its own outage).
 2. **Formspree is off the free tier** — or you have consciously accepted losing
@@ -83,7 +79,8 @@ real attribution; the rest only cost you legibility in reports.
    "new key event" button, the star is the toggle. `generate_lead` is starred
    already. `contact` has now fired and been seen in Realtime, but an event
    takes up to 24h to reach the *Recent events* list, and only what is in that
-   list can be starred. Nothing to do but wait a day and star it.
+   list can be starred. That 24h elapsed on the night of 24 Sep 2026, and
+   `contact` fired again that evening, so it should be listed now — star it.
 
    An event has to have fired at least once to be starrable at all, which is
    why this one lagged: `contact` is a WhatsApp tap on `/id`, and with no
@@ -136,12 +133,22 @@ chat leaves the site so no utm can follow it. Expect it to over-count real
 conversations, and reconcile by hand against actual chats weekly. Closing this
 properly needs the WhatsApp Business API.
 
-**Conversions API: configured, delivery unverified.** The relay is built,
-deployed and consent-gated ([`functions/api/meta-capi.js`](functions/api/meta-capi.js)),
-and `META_CAPI_TOKEN` is set in production. Without it every call returns
-`{"skipped"}` and nothing reaches Meta; it no longer does that, which is how we
-know the token is there. Whether Meta *accepts* it is a separate question and
-the one that matters.
+**Conversions API: delivering, dedup unproven.** The relay is built, deployed
+and consent-gated ([`functions/api/meta-capi.js`](functions/api/meta-capi.js)),
+`META_CAPI_TOKEN` is set in production, and Meta accepts what it sends —
+verified 24 Sep 2026, a server event returned
+`{"events_received":1,"messages":[]}` and showed Processed in Test Events.
+
+What remains unproven is deduplication end to end. Both halves of one form
+submit were observed carrying the same `event_id` (`7aaa642a…`) — the browser
+copy in the Pixel queue, the server copy in Test Events — which is the entire
+precondition for the merge. But no single row was ever seen marked both Browser
+and Server, and it cannot be seen in Test Events: with `META_CAPI_TEST_CODE`
+set, the server copy goes to the test tab while the browser copy goes to live
+reporting, so the pair is split across two places by construction. Read the
+answer off the first days of spend instead — reported conversions running at
+roughly double what actually lands in the inbox is what a dedup failure looks
+like.
 
 To verify delivery, or to rotate the token later:
 
@@ -151,8 +158,20 @@ To verify delivery, or to rotate the token later:
    Environment variables, as an encrypted secret, Production.
 3. A change there needs a redeploy before the Function sees it.
 4. Verify in Events Manager > Test Events: set `META_CAPI_TEST_CODE` to the
-   code shown there, submit a form, confirm the event arrives marked both
-   Browser and Server with one deduplicated count — then delete the test var.
+   code shown there, trigger an event, confirm it arrives Processed — then
+   delete the test var *and redeploy again*.
+
+   Trigger it with a WhatsApp tap on `/id` rather than a form submit. Same
+   shared-`event_id` path ([`src/lib/analytics.js`](src/lib/analytics.js)),
+   but it never touches Formspree, so it costs nothing against the 50/month
+   cap and sends no junk lead to the inbox.
+
+   Two traps, both hit on 24 Sep 2026. The code on that tab rotates —
+   reloading it or clicking *Open website* can change it, and events carrying
+   the previous code stop appearing even though Meta received them perfectly
+   well, which reads exactly like a broken relay. Re-read the code before
+   concluding anything. And while the var is set, every real lead's server
+   copy is diverted out of reporting, so delete it the moment you are done.
 
 Browser and server events share an `event_id`, which is what makes Meta merge
 them instead of double-counting; the dedup window is 48 hours.
