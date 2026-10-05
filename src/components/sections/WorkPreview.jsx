@@ -8,6 +8,20 @@ import './WorkPreview.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Homepage selection, in display order. Explicit names rather than a slice of
+// `projects` so reordering the portfolio list can't quietly change what the
+// home page leads with.
+const FEATURED = [
+  'Motherlight Birth Center',
+  'JuanUp 2026',
+  'Azraai Azmi Portfolio',
+  'Childreams Studio',
+]
+
+const featured = FEATURED
+  .map((name) => projects.find((p) => p.name === name))
+  .filter(Boolean)
+
 export default function WorkPreview() {
   const sectionRef = useRef(null)
 
@@ -33,7 +47,7 @@ export default function WorkPreview() {
         </div>
 
         <div className="wp-grid">
-          {projects.slice(0, 4).map((p) => (
+          {featured.map((p) => (
             <div className="wp-card" key={p.name}>
 
               <a
