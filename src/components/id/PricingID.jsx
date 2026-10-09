@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-import { waHrefFor, trackWaContactFor } from '../../lib/wa'
+import { waHrefFor } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import '../sections/Pricing.css'
 
@@ -106,7 +106,6 @@ export default function PricingID() {
                   href={waHrefFor(p.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackWaContactFor(p.name)}
                   className="price-card__cta"
                 >
                   <WaIcon size={15} /> Tanya paket ini

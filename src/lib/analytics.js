@@ -96,21 +96,3 @@ export function trackLead(market, service, user = {}) {
 export function trackFormError(market) {
   gaEvent('form_error', { market })
 }
-
-// Fired on a WhatsApp click, not on a message actually being sent, so it
-// over-counts against real conversations. Good enough as a delivery signal for
-// click-to-WhatsApp campaigns; it is not a lead count.
-export function trackContact(market, pkg) {
-  // Deliberately no value. A WhatsApp tap is a click, not an enquiry — the
-  // click-to-conversation-to-sale rate is unknown and far below a completed
-  // form's, so pricing it would quietly inflate every ID number. The package
-  // still rides along, which is what makes ID segmentable at all.
-  const eventId = newEventId()
-  pixelTrack('Contact', { content_category: market, ...(pkg && { content_name: pkg }) }, eventId)
-  gaEvent('contact', { market, ...(pkg && { package: pkg }) })
-
-  // No email or phone to send on this path — the visitor never typed any.
-  // The relay still contributes the click id, browser id, IP and user agent,
-  // which is exactly the coverage a blocked browser pixel loses.
-  sendCapi({ eventName: 'Contact', eventId, market, service: pkg })
-}

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { ShaderBackground, PulsingCircle } from '../ui/shaders-hero-section'
-import { waHref, trackWaContact } from '../../lib/wa'
+import { waHref } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import './lp-id.css'
 
@@ -41,7 +41,6 @@ function HeroContentID() {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWaContact}
             className="shader-btn shader-btn-solid shader-btn-wa"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >

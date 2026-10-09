@@ -3,7 +3,7 @@ import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projects } from '../../data/portfolio'
-import { waHref, trackWaContact } from '../../lib/wa'
+import { waHref } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import '../sections/WorkPreview.css'
 import './lp-id.css'
@@ -143,7 +143,6 @@ export default function WorkPreviewID() {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWaContact}
             className="btn wp-see-all-btn"
           >
             Mau website seperti ini? Chat kami <WaIcon size={15} />

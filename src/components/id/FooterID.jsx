@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { waHref, trackWaContact } from '../../lib/wa'
+import { waHref } from '../../lib/wa'
 import '../Footer.css'
 
 // Minimal footer for the ad landing page — contact channels only, no site nav.
@@ -26,7 +26,7 @@ export default function FooterID() {
           </div>
 
           <nav className="footer__nav">
-            <a href={waHref} target="_blank" rel="noopener noreferrer" onClick={trackWaContact}>WhatsApp</a>
+            <a href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <a href="mailto:spladestudio@gmail.com">Email</a>
             <Link to="/kebijakan-privasi">Kebijakan Privasi</Link>
             <a href="https://www.instagram.com/spladestudio/" target="_blank" rel="noopener noreferrer">Instagram</a>

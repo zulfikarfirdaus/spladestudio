@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { waHref, trackWaContact } from '../../lib/wa'
+import { waHref } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import '../Navbar.css'
 import './lp-id.css'
@@ -48,7 +48,6 @@ export default function NavbarID() {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWaContact}
             className="btn btn-primary navbar__cta navbar__cta--wa"
           >
             <WaIcon size={14} /> Chat WhatsApp

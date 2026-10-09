@@ -1,4 +1,4 @@
-import { waHref, trackWaContact } from '../../lib/wa'
+import { waHref } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import '../sections/CTA.css'
 import './lp-id.css'
@@ -22,7 +22,6 @@ export default function CTAID() {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWaContact}
             className="cta__btn"
           >
             <WaIcon size={15} /> Chat via WhatsApp
