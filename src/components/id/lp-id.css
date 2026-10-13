@@ -32,6 +32,7 @@
 
 /* Clear the fixed navbar when jumping to a section. */
 #work,
-#pricing {
+#pricing,
+#final-cta {
   scroll-margin-top: 88px;
 }

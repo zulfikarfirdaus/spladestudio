@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { waHref } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import '../Navbar.css'
 import './lp-id.css'
@@ -18,6 +17,11 @@ export default function NavbarID() {
   function toTop(e) {
     e.preventDefault()
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function toFinalCTA(e) {
+    e.preventDefault()
+    document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -45,9 +49,8 @@ export default function NavbarID() {
           </span>
 
           <a
-            href={waHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#final-cta"
+            onClick={toFinalCTA}
             className="btn btn-primary navbar__cta navbar__cta--wa"
           >
             <WaIcon size={14} /> Chat WhatsApp

@@ -5,7 +5,7 @@ import './lp-id.css'
 
 export default function CTAID() {
   return (
-    <section className="cta">
+    <section className="cta" id="final-cta">
       <div className="container">
         <div className="cta__content">
           <img

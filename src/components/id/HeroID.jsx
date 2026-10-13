@@ -1,8 +1,12 @@
 import { useRef, useState, useEffect } from 'react'
 import { ShaderBackground, PulsingCircle } from '../ui/shaders-hero-section'
-import { waHref } from '../../lib/wa'
 import WaIcon from './WaIcon'
 import './lp-id.css'
+
+function scrollToFinalCTA(e) {
+  e.preventDefault()
+  document.getElementById('final-cta')?.scrollIntoView({ behavior: 'smooth' })
+}
 
 function HeroContentID() {
   return (
@@ -38,9 +42,8 @@ function HeroContentID() {
             Lihat hasil karya
           </a>
           <a
-            href={waHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#final-cta"
+            onClick={scrollToFinalCTA}
             className="shader-btn shader-btn-solid shader-btn-wa"
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
           >
