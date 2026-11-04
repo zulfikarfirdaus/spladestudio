@@ -6,6 +6,7 @@ import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import LandingID from './pages/LandingID'
 import LandingAU from './pages/LandingAU'
+import Social from './pages/Social'
 
 export const routes = [
   {
@@ -30,6 +31,8 @@ export const routes = [
       { path: '/id', element: <LandingID /> },
       // Market landing page (Australia) — standalone layout, AUD pricing, form CTA
       { path: '/au', element: <LandingAU /> },
+      // Social media management pitch deck (Bahasa) — standalone, WhatsApp + Instagram CTAs
+      { path: '/social', element: <Social /> },
     ],
   },
 ]

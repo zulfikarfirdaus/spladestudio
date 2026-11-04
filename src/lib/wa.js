@@ -12,3 +12,15 @@ export function waHrefFor(paket) {
   const msg = `Halo Splade Studio! Saya tertarik dengan paket ${paket}. Bisa konsultasi?`
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`
 }
+
+// Social media management deck (/social). Its own opening line so the chat
+// already says which service the visitor came for, not the website one above.
+const waLink = (msg) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`
+
+export const waSocialHref = waLink(
+  'Halo Splade Studio! Saya tertarik dengan layanan social media management. Bisa konsultasi?',
+)
+
+export function waSocialHrefFor(paket) {
+  return waLink(`Halo Splade Studio! Saya tertarik dengan ${paket} social media management. Bisa konsultasi?`)
+}
