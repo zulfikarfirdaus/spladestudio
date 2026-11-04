@@ -77,8 +77,8 @@ export default function ConsentBanner() {
   // Answering notifies the store, which re-renders this straight back out.
   if (!undecided) return null
 
-  // Bahasa pages: the /id ad landing and the /social deck.
-  const t = pathname.startsWith('/id') || pathname.startsWith('/social') ? COPY.id : COPY.en
+  // Bahasa pages: the /id ad landing and the two decks, /social and /kenalan.
+  const t = ['/id', '/social', '/kenalan'].some((p) => pathname.startsWith(p)) ? COPY.id : COPY.en
 
   return (
     <section className="consent" ref={barRef} role="region" aria-label={t.label}>

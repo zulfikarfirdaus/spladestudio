@@ -33,6 +33,8 @@ export const routes = [
       { path: '/au', element: <LandingAU /> },
       // Social media management pitch deck (Bahasa) — standalone, WhatsApp + Instagram CTAs
       { path: '/social', element: <Social /> },
+      // The same deck for an employer: no pricing slide, no freelance terms
+      { path: '/kenalan', element: <Social edition="employer" /> },
     ],
   },
 ]
