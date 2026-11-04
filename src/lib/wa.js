@@ -24,9 +24,3 @@ export const waSocialHref = waLink(
 export function waSocialHrefFor(paket) {
   return waLink(`Halo Splade Studio! Saya tertarik dengan ${paket} social media management. Bisa konsultasi?`)
 }
-
-// The same deck sent to an employer (/kenalan): a conversation about working
-// together, not a service enquiry, so the opening line asks to talk, not to buy.
-export const waKenalanHref = waLink(
-  'Halo Zul! Saya sudah lihat presentasi tim social media kamu. Bisa ngobrol lebih lanjut?',
-)

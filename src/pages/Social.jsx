@@ -7,12 +7,11 @@ import {
 import Seo from '../components/Seo'
 import WaIcon from '../components/id/WaIcon'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
-import { waKenalanHref, waSocialHref, waSocialHrefFor } from '../lib/wa'
+import { waSocialHref, waSocialHrefFor } from '../lib/wa'
 import './Social.css'
 
 // Pitch deck for the social media management service, in Bahasa, in two
-// editions (see EDITIONS): /social for business owners buying the service,
-// /kenalan for an employer, without prices or freelance terms.
+// editions (see EDITIONS): /social, and /kenalan, the same deck without price.
 // One full-screen slide per section, in the order a business owner decides:
 // their problem, the team, how the work is controlled, proof, their own
 // control, price against hiring, objections, then the call. Navigation is
@@ -44,7 +43,7 @@ const Item = ({ children, className, as = 'div' }) => {
   return <Tag className={className} variants={rise}>{children}</Tag>
 }
 
-function WaButton({ href, children, className = 'sd-btn--wa', size }) {
+function WaButton({ href = waSocialHref, children = 'Konsultasi gratis via WhatsApp', className = 'sd-btn--wa', size }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`sd-btn ${className}${size === 'lg' ? ' sd-btn--lg' : ''}`}>
       <WaIcon size={size === 'lg' ? 20 : 16} /> {children}
@@ -242,7 +241,7 @@ function Cover({ ed }) {
           Zul dan 3 AI agent-nya akan bantu bikin desain, copywriting, dan strategi sosmed kamu.{ed.price}
         </p>
         <div className="sd-actions sd-in" style={{ '--d': '240ms' }}>
-          <WaButton href={ed.wa}>{ed.cta}</WaButton>
+          <WaButton />
           <a href="#workflow" className="sd-btn sd-btn--ghost">Lihat cara kerjanya</a>
         </div>
       </div>
@@ -623,18 +622,16 @@ function Pricing() {
   )
 }
 
-// `terms` marks the answers that are freelance contract terms, which the
-// employer edition leaves out.
 const FAQ = [
-  {terms: true, q: 'Kenapa kontrak minimum 3 bulan?', a: 'Bulan pertama dipakai untuk mengenal brand kamu dan melatih tim. Hasil social media datang dari konsistensi, bukan satu-dua postingan.'},
+  {q: 'Kenapa kontrak minimum 3 bulan?', a: 'Bulan pertama dipakai untuk mengenal brand kamu dan melatih tim. Hasil social media datang dari konsistensi, bukan satu-dua postingan.'},
   {q: 'Konten saya bakal kelihatan AI nggak?', a: 'Itu yang saya jaga. Tim dilatih dengan gaya brand kamu, dan setiap konten saya cek sebelum sampai ke kamu. Yang belum pas, saya kembalikan.'},
   {q: 'Apa yang perlu saya siapkan?', a: 'Info soal bisnis kamu, foto atau video produk kalau ada, dan akses Meta Business Suite supaya kami bisa posting dan membaca hasilnya.'},
   {q: 'Bisa diposting ke TikTok atau Threads?', a: 'Bisa. Kami posting ke Instagram dan Facebook, dan semua file bisa kamu download dari dashboard untuk dipakai di platform lain.'},
-  {terms: true, q: 'Berapa kali revisi?', a: 'Hingga 2 kali revisi per konten, langsung lewat komentar di dashboard.'},
-  {terms: true, q: 'Apa yang tidak termasuk?', a: 'Biaya dan pengelolaan iklan, sesi foto/video produk, dan desain logo. Semuanya bisa dibahas terpisah.'},
+  {q: 'Berapa kali revisi?', a: 'Hingga 2 kali revisi per konten, langsung lewat komentar di dashboard.'},
+  {q: 'Apa yang tidak termasuk?', a: 'Biaya dan pengelolaan iklan, sesi foto/video produk, dan desain logo. Semuanya bisa dibahas terpisah.'},
 ]
 
-function Faq({ ed }) {
+function Faq() {
   // One answer open at a time: opening a question closes the one before.
   const [open, setOpen] = useState(0)
   return (
@@ -644,7 +641,7 @@ function Faq({ ed }) {
         <Item as="h2" className="sd-h2">Sebelum kamu memutuskan.</Item>
       </Stagger>
       <Stagger className="sd-faq" gap={0.06}>
-        {ed.faq.map((f, k) => (
+        {FAQ.map((f, k) => (
           <Item key={f.q}>
             <details open={open === k} onToggle={(e) => {
               if (e.currentTarget.open) setOpen(k)
@@ -660,7 +657,7 @@ function Faq({ ed }) {
   )
 }
 
-function Closing({ ed }) {
+function Closing() {
   return (
     <div className="sd-slide__inner sd-closing">
       <Stagger className="sd-closing__copy">
@@ -669,9 +666,9 @@ function Closing({ ed }) {
           {AGENTS.map((a) => <span key={a.id} className="sd-closing__face"><img src={`${IMG}/agent-${a.id}.webp`} alt={`${a.name}, ${a.role}`} loading="lazy" width="600" height="830" style={{ top: FACE_TOP[a.id] }} /></span>)}
         </Item>
         <Item as="h2" className="sd-h1">Siap punya tim social media?</Item>
-        <Item as="p" className="sd-lede">{ed.closing}</Item>
+        <Item as="p" className="sd-lede">Jangan ragu hubungi untuk konsultasi dan diskusi.</Item>
         <Item className="sd-actions sd-actions--center">
-          <WaButton href={ed.wa} size="lg">Chat WhatsApp</WaButton>
+          <WaButton size="lg">Chat WhatsApp</WaButton>
           <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="sd-btn sd-btn--ghost"><IgIcon /> @spladestudio</a>
         </Item>
       </Stagger>
@@ -691,38 +688,31 @@ const SLIDES = [
   {id: 'konsultasi', tone: 'dark', C: Closing},
 ]
 
-// The deck in two editions. `client` sells the service to a business owner;
-// `employer` introduces the same team to a company hiring for social media,
-// so it drops everything that only a freelance buyer needs: the price, the
-// pricing slide, and the contract, revision and scope answers in the FAQ.
+// The deck in two editions, identical except for price. `client` (/social)
+// is the full pitch; `employer` (/kenalan) is the same deck for an employer,
+// without the pricing slide or any mention of the price.
+const SEO_TITLE = 'Jasa Social Media Management untuk UMKM — Splade Studio'
+const OG_TITLE = 'Social media bisnis kamu jadi makin rapi dan terjadwal — Splade Studio'
 const EDITIONS = {
   client: {
     path: '/social',
     slides: SLIDES,
-    faq: FAQ,
-    wa: waSocialHref,
-    cta: 'Konsultasi gratis via WhatsApp',
     price: <> Mulai <b>Rp 1,5 juta</b> per bulan.</>,
-    closing: 'Jangan ragu hubungi untuk konsultasi dan diskusi.',
     seo: {
-      title: 'Jasa Social Media Management untuk UMKM — Splade Studio',
+      title: SEO_TITLE,
+      ogTitle: OG_TITLE,
       description: 'Zul dan 3 AI agent-nya bantu bikin strategi, copywriting, dan desain sosmed kamu, dicek manusia sebelum tayang. Mulai Rp 1,5 juta per bulan. Konsultasi gratis via WhatsApp.',
-      ogTitle: 'Social media bisnis kamu jadi makin rapi dan terjadwal — Splade Studio',
       ogDescription: 'Zul dan 3 AI agent-nya bantu bikin desain, copywriting, dan strategi sosmed kamu. Mulai Rp 1,5 juta per bulan.',
     },
   },
   employer: {
     path: '/kenalan',
     slides: SLIDES.filter((s) => s.id !== 'harga'),
-    faq: FAQ.filter((f) => !f.terms),
-    wa: waKenalanHref,
-    cta: 'Chat via WhatsApp',
     price: null,
-    closing: 'Jangan ragu hubungi untuk ngobrol dan diskusi lebih lanjut.',
     seo: {
-      title: 'Kenalan dengan Zul dan tim social media AI-nya — Splade Studio',
-      description: 'Zul dan 3 AI agent-nya bantu bikin strategi, copywriting, dan desain sosmed, dicek manusia sebelum tayang.',
-      ogTitle: 'Social media bisnis kamu jadi makin rapi dan terjadwal — Splade Studio',
+      title: SEO_TITLE,
+      ogTitle: OG_TITLE,
+      description: 'Zul dan 3 AI agent-nya bantu bikin strategi, copywriting, dan desain sosmed kamu, dicek manusia sebelum tayang. Konsultasi gratis via WhatsApp.',
       ogDescription: 'Zul dan 3 AI agent-nya bantu bikin desain, copywriting, dan strategi sosmed kamu.',
     },
   },
@@ -772,7 +762,7 @@ export default function Social({ edition = 'client' }) {
           <span aria-live="polite">{pad(active + 1)} / {pad(slides.length)}</span>
           <button type="button" onClick={() => go(active + 1)} disabled={active === slides.length - 1} aria-label="Slide berikutnya"><ChevronDown size={18} /></button>
         </div>
-        <a href={ed.wa} target="_blank" rel="noopener noreferrer" className="sd-bar__wa"><WaIcon size={14} /> <span>Chat WhatsApp</span></a>
+        <a href={waSocialHref} target="_blank" rel="noopener noreferrer" className="sd-bar__wa"><WaIcon size={14} /> <span>Chat WhatsApp</span></a>
       </header>
       <main className="sd-deck">
         {slides.map(({id, tone, C}, k) => (
