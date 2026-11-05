@@ -1,7 +1,6 @@
 import { Head } from 'vite-react-ssg'
 
 const SITE = 'https://spladestudio.com'
-const OG_IMAGE = `${SITE}/og-image.png`
 
 // og:locale wants language_TERRITORY. Our `lang` values are BCP 47, which is
 // the same information with a hyphen — except bare 'en'/'id', which need a
@@ -25,6 +24,9 @@ const ogLocale = (lang) => OG_LOCALES[lang] || lang.replace('-', '_')
 // translation, the page's own included: hreflang has to be reciprocal or it is
 // ignored, and listing self is what makes that true no matter which one is
 // being rendered.
+//
+// `ogImage` is a 1200x630 file in public/, for a page with a preview of its
+// own; every other page shares the logo card. Give `ogImageAlt` with it.
 export default function Seo({
   title,
   description,
@@ -33,9 +35,12 @@ export default function Seo({
   noindex = false,
   ogTitle,
   ogDescription,
+  ogImage = '/og-image.png',
+  ogImageAlt,
   alternates = [],
 }) {
   const url = `${SITE}${path}`
+  const image = `${SITE}${ogImage}`
   const social = {
     title: ogTitle || title,
     description: ogDescription || description,
@@ -64,14 +69,16 @@ export default function Seo({
       <meta property="og:url" content={url} />
       <meta property="og:title" content={social.title} />
       <meta property="og:description" content={social.description} />
-      <meta property="og:image" content={OG_IMAGE} />
+      <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={social.title} />
       <meta name="twitter:description" content={social.description} />
-      <meta name="twitter:image" content={OG_IMAGE} />
+      <meta name="twitter:image" content={image} />
+      {ogImageAlt && <meta name="twitter:image:alt" content={ogImageAlt} />}
     </Head>
   )
 }

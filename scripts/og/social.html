@@ -1,0 +1,106 @@
+<!doctype html>
+<!--
+  Link-preview image (og:image) for the /social deck and its /kenalan edition.
+  1200x630. The two are identical except that /kenalan has no price, the same
+  rule the deck itself follows. Open with #kenalan to get that edition.
+
+  Render (from the repo root), then commit the two JPGs in public/:
+
+    CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    for ed in social kenalan; do
+      "$CHROME" --headless=new --hide-scrollbars --window-size=1200,630 \
+        --virtual-time-budget=8000 --screenshot=/tmp/og-$ed.png \
+        "file://$PWD/scripts/og/social.html#$ed"
+      sips -s format jpeg -s formatOptions 85 /tmp/og-$ed.png --out public/og-$ed.jpg
+    done
+
+  Rename the files when you change them: WhatsApp and Facebook cache a
+  preview image by its URL, so an edit under the same name can go unseen.
+-->
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Inter:wght@400;500;600&display=block" rel="stylesheet" />
+<style>
+  :root { --lime: #B9E600; --navy: #141414; --white: #fff; --muted: #8891A4; --cream: #F3F0E6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--navy); }
+  body { position: relative; font-family: 'Inter', sans-serif; color: var(--white); -webkit-font-smoothing: antialiased; }
+
+  /* ── left: the pitch ─────────────────────────────────────────────── */
+  .copy {
+    position: absolute; inset: 0 auto 0 0; width: 640px; padding: 58px 0 56px 68px;
+    display: flex; flex-direction: column; z-index: 2;
+  }
+  .logo { height: 34px; width: auto; align-self: flex-start; }
+  .label { display: flex; align-items: center; gap: 10px; margin-top: auto; font-size: 19px; font-weight: 500; color: var(--muted); }
+  .label::before { content: ''; width: 9px; height: 9px; border-radius: 9px; background: var(--lime); }
+  h1 {
+    margin-top: 16px; font-family: 'Crete Round', serif; font-style: italic; font-weight: 400;
+    font-size: 64px; line-height: 1.04; letter-spacing: -0.02em;
+  }
+  h1 em { font-style: italic; color: var(--lime); }
+
+  .foot { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; margin-top: 34px; }
+  .team { display: flex; align-items: center; gap: 14px; }
+  .faces { display: flex; }
+  .face {
+    position: relative; width: 54px; height: 54px; border-radius: 54px; overflow: hidden;
+    background: var(--cream); box-shadow: 0 0 0 3px var(--navy);
+  }
+  .face + .face { margin-left: -14px; }
+  .face img { position: absolute; left: 50%; translate: -50% 0; width: 230%; }
+  .face--zul { background: var(--lime); }
+  .face--zul img { width: 100%; top: 4px; }
+  .team p { font-size: 18px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+  .team small { display: block; font-size: 15px; font-weight: 400; color: var(--muted); }
+  .price {
+    padding: 13px 22px; border-radius: 999px; background: var(--lime); color: #0a1a04;
+    font-size: 18px; font-weight: 500; white-space: nowrap;
+  }
+  .price b { font-weight: 600; }
+  :root.kenalan .price { display: none; }
+
+  /* ── right: the work, big ────────────────────────────────────────── */
+  .disc { position: absolute; width: 470px; height: 470px; border-radius: 50%; background: var(--lime); left: 760px; top: 96px; }
+  .post {
+    position: absolute; width: 292px; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+  .post img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .post--a { left: 676px; top: 128px; rotate: -9deg; }
+  .post--c { left: 928px; top: 122px; rotate: 9deg; }
+  .post--b { left: 800px; top: 84px; z-index: 1; width: 312px; }
+</style>
+<script>
+  // The edition comes from the hash so one file renders both images.
+  if (location.hash === '#kenalan') document.documentElement.classList.add('kenalan')
+</script>
+</head>
+<body>
+  <div class="disc"></div>
+  <div class="post post--a"><img src="../../public/images/social/post-seri-1.webp" alt="" /></div>
+  <div class="post post--c"><img src="../../public/images/social/post-remah-2.webp" alt="" /></div>
+  <div class="post post--b"><img src="../../public/images/social/post-remah-1.webp" alt="" /></div>
+
+  <div class="copy">
+    <img class="logo" src="../../public/images/logo-white.svg" alt="Splade Studio" />
+    <div class="label">Social media management</div>
+    <h1>Social media bisnis kamu jadi makin <em>rapi dan terjadwal.</em></h1>
+    <div class="foot">
+      <div class="team">
+        <div class="faces">
+          <span class="face face--zul"><img src="../../public/images/social/zul.webp" alt="" /></span>
+          <span class="face"><img src="../../public/images/social/agent-supri.webp" alt="" style="top:-4%" /></span>
+          <span class="face"><img src="../../public/images/social/agent-kojek.webp" alt="" style="top:-1.5%" /></span>
+          <span class="face"><img src="../../public/images/social/agent-deden.webp" alt="" style="top:7%" /></span>
+        </div>
+        <p>Zul + 3 AI agent<small>Desain, copywriting, strategi</small></p>
+      </div>
+      <div class="price">Mulai <b>Rp 1,5 juta</b>/bulan</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -693,6 +693,8 @@ const SLIDES = [
 // without the pricing slide or any mention of the price.
 const SEO_TITLE = 'Jasa Social Media Management untuk UMKM — Splade Studio'
 const OG_TITLE = 'Social media bisnis kamu jadi makin rapi dan terjadwal — Splade Studio'
+// Preview images come from scripts/og/social.html; /kenalan's has no price.
+const OG_ALT = 'Social media bisnis kamu jadi makin rapi dan terjadwal: Zul dan 3 AI agent, dengan contoh post Instagram untuk Remah dan Seri.'
 const EDITIONS = {
   client: {
     path: '/social',
@@ -703,6 +705,8 @@ const EDITIONS = {
       ogTitle: OG_TITLE,
       description: 'Zul dan 3 AI agent-nya bantu bikin strategi, copywriting, dan desain sosmed kamu, dicek manusia sebelum tayang. Mulai Rp 1,5 juta per bulan. Konsultasi gratis via WhatsApp.',
       ogDescription: 'Zul dan 3 AI agent-nya bantu bikin desain, copywriting, dan strategi sosmed kamu. Mulai Rp 1,5 juta per bulan.',
+      ogImage: '/og-social.jpg',
+      ogImageAlt: `${OG_ALT} Mulai Rp 1,5 juta per bulan.`,
     },
   },
   employer: {
@@ -714,6 +718,8 @@ const EDITIONS = {
       ogTitle: OG_TITLE,
       description: 'Zul dan 3 AI agent-nya bantu bikin strategi, copywriting, dan desain sosmed kamu, dicek manusia sebelum tayang. Konsultasi gratis via WhatsApp.',
       ogDescription: 'Zul dan 3 AI agent-nya bantu bikin desain, copywriting, dan strategi sosmed kamu.',
+      ogImage: '/og-kenalan.jpg',
+      ogImageAlt: OG_ALT,
     },
   },
 }
