@@ -1,5 +1,12 @@
 export const projects = [
   {
+    name: 'Mancing Daring',
+    desc: 'Light, editorial revamp for a performance marketing agency, with its own CMS.',
+    tags: ['Web Design', 'Web Development'],
+    url: 'mancingdaring.com',
+    image: '/images/mancingdaring.webp',
+  },
+  {
     name: 'JuanUp 2026',
     desc: 'Modern, energetic website for the JuanUp 2026 event in the Philippines.',
     tags: ['Landing Page', 'Web Development'],

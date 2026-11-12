@@ -15,7 +15,7 @@ const FEATURED = [
   'Motherlight Birth Center',
   'JuanUp 2026',
   'Azraai Azmi Portfolio',
-  'Childreams Studio',
+  'Mancing Daring',
 ]
 
 const featured = FEATURED
