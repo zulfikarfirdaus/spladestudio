@@ -35,6 +35,9 @@ export const routes = [
       { path: '/social', element: <Social /> },
       // The same deck for an employer, without the pricing slide or price
       { path: '/kenalan', element: <Social edition="employer" /> },
+      // /kenalan in English, for international clients (Upwork, Contra). No
+      // price, email instead of WhatsApp. /en redirects here (public/_redirects).
+      { path: '/en/social-media', element: <Social edition="en" /> },
     ],
   },
 ]

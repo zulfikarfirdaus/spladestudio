@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- /id and /au are deliberately absent: they are noindex ad landing pages. -->
+<!-- /id and /au are deliberately absent: they are noindex ad landing pages.
+     So are the Bahasa decks /social and /kenalan, which are noindex too. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://spladestudio.com/</loc>
@@ -11,6 +12,10 @@
   </url>
   <url>
     <loc>https://spladestudio.com/contact</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://spladestudio.com/en/social-media</loc>
     <priority>0.8</priority>
   </url>
   <url>

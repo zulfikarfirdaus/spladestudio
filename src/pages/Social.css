@@ -83,7 +83,14 @@ html:has(.sd-deck) { scroll-snap-type: y proximity; }
 .sd-bar__pager button:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); }
 .sd-bar__pager button:disabled { opacity: 0.3; cursor: default; }
 .sd-bar button:focus-visible, .sd-bar a:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
-.sd-bar__wa { justify-self: end; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--lime); color: #0a1a04; font-size: 0.85rem; font-weight: 500; white-space: nowrap; }
+.sd-bar__end { justify-self: end; display: flex; align-items: center; gap: 6px; }
+.sd-bar__wa { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--lime); color: #0a1a04; font-size: 0.85rem; font-weight: 500; white-space: nowrap; }
+/* language switch: the current language filled, the other a link */
+.sd-lang { display: flex; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; }
+.sd-lang > * { padding: 7px 9px; border-radius: 999px; line-height: 1; }
+.sd-lang span { background: rgba(255, 255, 255, 0.16); color: var(--white); }
+.sd-lang a { color: rgba(255, 255, 255, 0.6); transition: color var(--transition); }
+.sd-lang a:hover { color: var(--white); }
 
 /* ── 1 cover ──────────────────────────────────────────────────────────── */
 .sd-in { animation: sd-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) both; }
@@ -185,6 +192,13 @@ html:has(.sd-deck) { scroll-snap-type: y proximity; }
   border-top: 2.5px solid #c9c9bf; border-right: 2.5px solid #c9c9bf; rotate: 45deg; translate: 0 -50%; transition: border-color 0.4s;
 }
 .sd-flow__card.done::after { border-color: #8aa800; }
+/* the step that carries on past the cards, on the next slide */
+.sd-flow__next {
+  display: flex; align-items: center; gap: 6px; width: fit-content; margin: 26px 0 0 auto; padding: 9px 16px; border-radius: 999px;
+  background: var(--navy); color: var(--lime); font-size: 0.85rem; font-weight: 600; transition: translate var(--transition);
+}
+.sd-flow__next:hover { translate: 0 2px; }
+.sd-flow__next:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
 .sd-flow__tag { display: inline-block; padding: 6px 12px; border-radius: 999px; background: var(--navy); color: var(--lime); font-size: 0.78rem; font-weight: 600; }
 .sd-flow__who { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
 .sd-flow__who p { font-size: 0.95rem; color: #555; }
@@ -246,8 +260,15 @@ html:has(.sd-deck) { scroll-snap-type: y proximity; }
 /* ── 5 portfolio ──────────────────────────────────────────────────────── */
 .sd-work { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .sd-work__brand h3 { font-family: var(--font-heading); font-style: italic; font-weight: 400; font-size: 1.9rem; margin-bottom: 14px; }
-.sd-work__brand h3 small { font-family: var(--font-body); font-style: normal; font-size: 0.9rem; color: var(--muted); margin-left: 8px; }
+.sd-work__brand h3 small { display: inline-block; font-family: var(--font-body); font-style: normal; font-size: 0.9rem; color: var(--muted); margin-left: 8px; }
 .sd-work__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sd-work__row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 16px) / 3); gap: 8px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.sd-work__row::-webkit-scrollbar { display: none; }
+.sd-work__row .sd-ig { scroll-snap-align: start; }
+.sd-work__row .sd-ig__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .sd-ig { background: #fff; color: #111; border-radius: 16px; overflow: hidden; }
 .sd-ig__head { display: flex; align-items: center; gap: 8px; padding: 9px 10px; }
 .sd-ig__avatar { width: 30px; height: 30px; border-radius: 30px; padding: 2px; background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7); flex-shrink: 0; }
@@ -349,6 +370,7 @@ html:has(.sd-deck) { scroll-snap-type: y proximity; }
 .sd-closing { text-align: center; }
 .sd-closing__copy { display: flex; flex-direction: column; align-items: center; }
 .sd-closing .sd-lede { margin-left: auto; margin-right: auto; }
+.sd-closing__address { margin-top: 20px; font-size: 0.95rem; color: var(--muted); }
 /* Zul first and in front, the three agents tucked behind him */
 .sd-closing__team { display: flex; margin-bottom: 28px; }
 .sd-closing__face {
@@ -394,6 +416,7 @@ html:has(.sd-deck) { scroll-snap-type: y proximity; }
   .sd-agent h3 { font-size: 1.35rem; }
   .sd-agent li { font-size: 0.82rem; }
   .sd-work__pair { gap: 8px; }
+  .sd-work__row { grid-auto-columns: 78%; }
   .sd-slop { height: 300px; }
   .sd-slop__img { width: 46%; }
   .sd-slop__img--2 { left: 27%; }

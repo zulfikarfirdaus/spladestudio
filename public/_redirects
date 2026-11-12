@@ -9,3 +9,8 @@
 # zone-level Redirect Rule in Cloudflare instead (Rules > Redirect Rules); see
 # MARKETING.md. Until then the <Seo> canonical still points every www page at
 # its apex twin, so search consolidates correctly either way.
+
+# /en has no page of its own yet; the English social media deck is the only
+# English-language landing page outside the main site.
+/en  /en/social-media  301
+/en/ /en/social-media  301
