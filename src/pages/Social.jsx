@@ -175,21 +175,6 @@ function IgCarousel({ account, posts }) {
   )
 }
 
-/** Every post at once, side by side: three frames on desktop, a row to swipe
-    on a phone. For a brand with no reel to pair its carousel with. */
-function IgRow({ account, posts }) {
-  return (
-    <div className="sd-work__row">
-      {posts.map((p) => (
-        <figure key={p.src} className="sd-ig">
-          <IgHeader {...account} />
-          <div className="sd-ig__media"><img src={p.src} alt={p.alt} loading="lazy" width="900" height="1125" /></div>
-        </figure>
-      ))}
-    </div>
-  )
-}
-
 function IgReel({ account, reel, t }) {
   return (
     <figure className="sd-ig sd-ig--reel">
@@ -490,14 +475,10 @@ function Work({ t }) {
         {t.work.brands.map((b) => (
           <Item key={b.a} className="sd-work__brand">
             <h3>{b.name} <small>{b.kind}</small></h3>
-            {/* With a reel: the carousel and the reel, side by side. Without
-                one, the posts in a row instead of a carousel beside a gap. */}
-            {b.reel ? (
-              <div className="sd-work__pair">
-                <IgCarousel account={ACCOUNTS[b.a]} posts={b.posts} />
-                <IgReel account={ACCOUNTS[b.a]} reel={b.reel} t={t} />
-              </div>
-            ) : <IgRow account={ACCOUNTS[b.a]} posts={b.posts} />}
+            <div className="sd-work__pair">
+              <IgCarousel account={ACCOUNTS[b.a]} posts={b.posts} />
+              <IgReel account={ACCOUNTS[b.a]} reel={b.reel} t={t} />
+            </div>
           </Item>
         ))}
       </Stagger>

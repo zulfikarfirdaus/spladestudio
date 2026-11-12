@@ -104,14 +104,11 @@ export default {
     h2: 'Two samples: a bakery and a dental clinic.',
     play: (label) => `Play ${label}`,
     audio: 'Original audio',
+    // English cuts of the Reels (720 × 900, muted, from splade-reel's out/<brand>/en/).
+    // The posters are a frame past each Reel's blank intro.
     brands: [
-      // REEL SLOT: the Indonesian Reels are not reused here. To show an English
-      // one, add public/images/social/en/remah-reel-en.mp4 and set
-      // reel: { src: `${IMG}/remah-reel-en.mp4`, label: 'Remah Reel' }
-      // (a `poster` image is optional). Until then the slot stays hidden.
-      { a: 'remah', name: 'Remah', kind: 'Sample work for a fictional bakery', posts: REMAH, reel: null },
-      // REEL SLOT: same for public/images/social/en/seri-reel-en.mp4.
-      { a: 'seri', name: 'Seri', kind: 'Sample work for a fictional dental clinic', posts: SERI, reel: null },
+      { a: 'remah', name: 'Remah', kind: 'Sample work for a fictional bakery', posts: REMAH, reel: { src: `${IMG}/remah-reel-en.mp4`, poster: `${IMG}/remah-reel-en-poster.webp`, label: 'Remah Reel: croissants and cinnamon rolls on plates, "Baked every morning"' } },
+      { a: 'seri', name: 'Seri', kind: 'Sample work for a fictional dental clinic', posts: SERI, reel: { src: `${IMG}/seri-reel-en.mp4`, poster: `${IMG}/seri-reel-en-poster.webp`, label: 'Seri Reel: a two-minute brushing timer for kids, area by area' } },
     ],
   },
 
